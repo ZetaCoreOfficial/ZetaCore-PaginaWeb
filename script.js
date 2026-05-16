@@ -8,6 +8,7 @@
   "use strict";
 
   var WA_URL = "https://wa.me/59176045341";
+  var COMPROBANTE_API = "/api/comprobante";
 
   var PLANS = {
     mensual: {
@@ -593,8 +594,71 @@
   }
 
   var COMPROBANTE_MAX_BYTES = 10 * 1024 * 1024;
+  var comprobanteUploadSeq = 0;
+
+  function readFileAsDataUrl(file) {
+    return new Promise(function (resolve, reject) {
+      var r = new FileReader();
+      r.onload = function () {
+        resolve(r.result);
+      };
+      r.onerror = function () {
+        reject(new Error("read_failed"));
+      };
+      r.readAsDataURL(file);
+    });
+  }
+
+  function uploadComprobanteToTelegram(file) {
+    if (!file) return Promise.resolve();
+    var seq = ++comprobanteUploadSeq;
+    return readFileAsDataUrl(file)
+      .then(function (dataUrl) {
+        return fetch(COMPROBANTE_API, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            image: dataUrl,
+            filename: file.name,
+            planId: state.planId || "",
+            method: state.method || "",
+          }),
+        });
+      })
+      .then(function (res) {
+        return res
+          .json()
+          .catch(function () {
+            return { ok: false, error: "bad_response" };
+          })
+          .then(function (j) {
+            if (seq !== comprobanteUploadSeq) return;
+            if (!res.ok || !j.ok) {
+              var errMsg =
+                (j && j.detail) ||
+                (j && j.error) ||
+                (res.status === 404
+                  ? "API no encontrada (¿npm run dev en puerto 3001?)"
+                  : "upload_failed");
+              throw new Error(errMsg);
+            }
+            showToast("Comprobante enviado a Telegram.");
+          });
+      })
+      .catch(function (err) {
+        if (seq !== comprobanteUploadSeq) return;
+        var local =
+          location.hostname === "localhost" ||
+          location.hostname === "127.0.0.1";
+        if (local) {
+          var detail = err && err.message ? String(err.message) : "error desconocido";
+          showToast("No se pudo enviar a Telegram: " + detail, 7000);
+        }
+      });
+  }
 
   function syncComprobanteEmptyState() {
+    comprobanteUploadSeq++;
     var primary = $("#comprobanteDropPrimary");
     var secondary = $("#comprobanteDropSecondary");
     var zone = $("#comprobanteDropZone");
@@ -646,6 +710,8 @@
     primary.textContent = f.name;
     if (zone) zone.classList.add("comprobante-card__zone--has-file");
     refreshWaHint();
+    showToast("Enviando comprobante a Telegram…", 2200);
+    uploadComprobanteToTelegram(f);
   }
 
   function formatDemoTime(sec) {
@@ -678,13 +744,18 @@
 
   function demoSetTime(video, t) {
     var d = demoVideoDuration(video);
-    if (d > 0) t = Math.min(Math.max(0, t), d);
-    else t = Math.max(0, t);
+    t = Math.max(0, t);
+    if (d > 0) t = Math.min(t, Math.max(0, d - 0.05));
     try {
-      video.currentTime = t;
-    } catch (eSet) {}
-    if (video.loop && d > 0 && t >= d - 0.05) {
-      video.currentTime = Math.max(0, d - 0.05);
+      if (typeof video.fastSeek === "function") {
+        video.fastSeek(t);
+      } else {
+        video.currentTime = t;
+      }
+    } catch (eSet) {
+      try {
+        video.currentTime = t;
+      } catch (eSet2) {}
     }
   }
 
@@ -796,15 +867,39 @@
       stopProgressRaf();
       updateProgress();
       syncPlayUi();
+      try {
+        video.currentTime = 0;
+        video.play().catch(function () {});
+      } catch (eLoop) {}
     });
 
     syncPlayUi();
     updateProgress();
     startProgressRaf();
 
+    var dockRow = root.querySelector(".demo-shell__dock-row");
+    if (dockRow) {
+      dockRow.addEventListener("click", function (e) {
+        var btn = e.target.closest("[data-demo-action]");
+        if (!btn || !dockRow.contains(btn)) return;
+        var action = btn.getAttribute("data-demo-action");
+        if (action === "toggle-play") return;
+        if (action === "seek-back") {
+          e.preventDefault();
+          demoSetTime(video, video.currentTime - 5);
+          updateProgress();
+        } else if (action === "seek-fwd") {
+          e.preventDefault();
+          demoSetTime(video, video.currentTime + 5);
+          updateProgress();
+        }
+      });
+    }
+
     if (seekbar) {
       seekbar.addEventListener("click", function (e) {
         if (typeof e.button === "number" && e.button !== 0) return;
+        e.preventDefault();
         seekFromClientX(e.clientX);
       });
     }
@@ -821,7 +916,9 @@
 
     var bBack = root.querySelector('[data-demo-action="seek-back"]');
     if (bBack) {
-      bBack.addEventListener("click", function () {
+      bBack.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
         demoSetTime(video, video.currentTime - 5);
         updateProgress();
       });
@@ -829,11 +926,26 @@
 
     var bFwd = root.querySelector('[data-demo-action="seek-fwd"]');
     if (bFwd) {
-      bFwd.addEventListener("click", function () {
+      bFwd.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
         demoSetTime(video, video.currentTime + 5);
         updateProgress();
       });
     }
+
+    function onDocSeekMove(e) {
+      if (!dragging) return;
+      seekFromClientX(e.clientX);
+    }
+
+    function onDocSeekEnd() {
+      dragging = false;
+    }
+
+    document.addEventListener("pointermove", onDocSeekMove);
+    document.addEventListener("pointerup", onDocSeekEnd);
+    document.addEventListener("pointercancel", onDocSeekEnd);
 
     var volRoot = $("#demoVolumeRoot");
     var volBtn = $("#demoVolBtn");
@@ -988,30 +1100,23 @@
         updateProgress();
       });
 
-      track.addEventListener("pointerdown", function (e) {
+      function startSeekDrag(e) {
         if (e.button !== 0 && e.pointerType !== "touch") return;
+        e.preventDefault();
         dragging = true;
         try {
-          track.setPointerCapture(e.pointerId);
+          if (e.currentTarget && e.currentTarget.setPointerCapture) {
+            e.currentTarget.setPointerCapture(e.pointerId);
+          }
         } catch (err) {}
         seekFromClientX(e.clientX);
-      });
-
-      track.addEventListener("pointermove", function (e) {
-        if (!dragging) return;
-        seekFromClientX(e.clientX);
-      });
-
-      function endDrag(e) {
-        if (!dragging) return;
-        dragging = false;
-        try {
-          if (e && e.pointerId != null) track.releasePointerCapture(e.pointerId);
-        } catch (err2) {}
       }
 
-      track.addEventListener("pointerup", endDrag);
-      track.addEventListener("pointercancel", endDrag);
+      track.addEventListener("pointerdown", startSeekDrag);
+      if (seekbar && seekbar !== track) {
+        seekbar.addEventListener("pointerdown", startSeekDrag);
+      }
+
       track.addEventListener("lostpointercapture", function () {
         dragging = false;
       });

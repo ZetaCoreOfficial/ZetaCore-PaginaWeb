@@ -5,6 +5,7 @@
   "main": "script.js",
   "scripts": {
     "start": "npx --yes serve -l tcp://0.0.0.0:3001 .",
+    "dev": "node server/local-dev.cjs",
     "start:alt": "npx --yes serve -l tcp://0.0.0.0:3001 .",
     "build:logo": "node scripts/build-header-logo.cjs",
     "optimize:demo-video": "node scripts/optimize-demo-video.cjs",
