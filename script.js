@@ -7,7 +7,7 @@
 (function () {
   "use strict";
 
-  var WA_BASE = "https://wa.me/59176045341?text=";
+  var WA_URL = "https://wa.me/59176045341";
 
   var PLANS = {
     mensual: {
@@ -49,10 +49,6 @@
   function $(sel) {
     return document.querySelector(sel);
   }
-
-  var TOAST_MS_WHATSAPP_COMPROBANTE = 15000;
-  var MSG_TOAST_WHATSAPP_COMPROBANTE =
-    "Mensaje copiado, pegalo junto a la imagen que mandaras al Whatsapp";
 
   function showToast(msg, durationMs) {
     var t = $("#toast");
@@ -246,32 +242,6 @@
     });
   }
 
-  function buildWhatsAppMessage() {
-    var plan = PLANS[state.planId];
-    var methodLabel =
-      state.method === "bolivia" ? "QR Bolivia" : "Binance USDT";
-    var monto =
-      state.method === "bolivia" ? plan.bs + " Bs" : plan.usdt + " USDT";
-
-    return (
-      "Hola, quiero adquirir ZetaCore.\n" +
-      "Plan: " +
-      plan.label +
-      "\n" +
-      "Método de pago: " +
-      methodLabel +
-      "\n" +
-      "Monto: " +
-      monto +
-      "\n" +
-      "Adjunto mi comprobante de pago."
-    );
-  }
-
-  function getWaUrl() {
-    return WA_BASE + encodeURIComponent(buildWhatsAppMessage());
-  }
-
   function getComprobanteFile() {
     var input = $("#comprobanteInput");
     if (!input || !input.files || input.files.length < 1) return null;
@@ -290,37 +260,17 @@
     return false;
   }
 
-  var MSG_SUBIR_IMAGEN_COMPROBANTE =
-    "Debes subir una imagen para validar tu comprobante de pago, antes de darle a este boton";
-
   function refreshWaHint() {
     var hint = $("#waHint");
     var waBtn = $("#btnWhatsapp");
     var dlBtn = $("#btnDescargarQr");
-    if (!hint) return;
-    if (!state.planId || !state.method) {
+    if (hint) {
       hint.textContent = "";
       hint.hidden = true;
-      if (waBtn) waBtn.disabled = true;
-      return;
     }
-    var qrReady = !!(dlBtn && !dlBtn.disabled);
-    if (!qrReady) {
-      hint.textContent = "";
-      hint.hidden = true;
-      if (waBtn) waBtn.disabled = true;
-      return;
-    }
-    var f = getComprobanteFile();
-    var okFile = !!(f && isComprobanteImageFile(f));
-    if (waBtn) waBtn.disabled = !okFile;
-    if (okFile) {
-      hint.textContent = "";
-      hint.hidden = true;
-    } else {
-      hint.textContent = MSG_SUBIR_IMAGEN_COMPROBANTE;
-      hint.hidden = false;
-    }
+    if (!waBtn) return;
+    var qrReady = !!(state.planId && state.method && dlBtn && !dlBtn.disabled);
+    waBtn.disabled = !qrReady;
   }
 
   function showFlowPanel(show) {
@@ -567,78 +517,9 @@
     showToast("Descarga iniciada.");
   }
 
-  function copyComprobanteMessageSync(text) {
-    try {
-      var ta = document.createElement("textarea");
-      ta.value = text;
-      ta.setAttribute("readonly", "");
-      ta.style.position = "fixed";
-      ta.style.left = "-9999px";
-      ta.style.opacity = "0";
-      document.body.appendChild(ta);
-      ta.focus();
-      ta.select();
-      document.execCommand("copy");
-      document.body.removeChild(ta);
-    } catch (e2) {}
-  }
-
-  /** Mensaje del plan + método (buildWhatsAppMessage) al portapapeles antes de compartir o abrir WhatsApp. */
-  function copyPredeterminadoComprobante(text) {
-    copyComprobanteMessageSync(text);
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).catch(function () {});
-    }
-  }
-
   function openWhatsapp() {
-    if (!state.planId) {
-      showToast("Elige un plan.");
-      return;
-    }
-    if (!state.method) {
-      showToast("Elige un método de pago (QR Bolivia o Binance USDT).");
-      return;
-    }
-    var file = getComprobanteFile();
-    if (!file || !isComprobanteImageFile(file)) {
-      showToast(MSG_SUBIR_IMAGEN_COMPROBANTE);
-      return;
-    }
-    setUiStep(4);
-    var msg = buildWhatsAppMessage();
-    copyPredeterminadoComprobante(msg);
-    var waUrl = getWaUrl();
-    if (navigator.share) {
-      var payload = {
-        title: "ZetaCore — comprobante",
-        text: msg,
-        files: [file],
-      };
-      var filesOk = true;
-      try {
-        if (navigator.canShare) {
-          filesOk = navigator.canShare({ files: [file] });
-        }
-      } catch (e0) {
-        filesOk = true;
-      }
-      if (filesOk) {
-        navigator
-          .share(payload)
-          .then(function () {
-            showToast(MSG_TOAST_WHATSAPP_COMPROBANTE, TOAST_MS_WHATSAPP_COMPROBANTE);
-          })
-          .catch(function (err2) {
-            if (err2 && err2.name === "AbortError") return;
-            window.open(waUrl, "_blank", "noopener,noreferrer");
-            showToast(MSG_TOAST_WHATSAPP_COMPROBANTE, TOAST_MS_WHATSAPP_COMPROBANTE);
-          });
-        return;
-      }
-    }
-    window.open(waUrl, "_blank", "noopener,noreferrer");
-    showToast(MSG_TOAST_WHATSAPP_COMPROBANTE, TOAST_MS_WHATSAPP_COMPROBANTE);
+    if (state.planId && state.method) setUiStep(4);
+    window.location.href = WA_URL;
   }
 
   function goBackStep() {
