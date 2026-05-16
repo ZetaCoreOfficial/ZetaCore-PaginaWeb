@@ -1,0 +1,419 @@
+/**
+ * Planes — especificación técnica (logos_exactos).
+ * Alcance: solo dentro de .section--planes.plans-section
+ */
+
+.section--planes.plans-section {
+  width: 100%;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 48px 0 40px;
+  box-sizing: border-box;
+}
+
+.section--planes.plans-section > h2.plans-title.section__title--sci {
+  display: block;
+  position: relative;
+  text-align: center;
+  margin: 0 0 26px;
+  font-size: 28px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: 4px;
+  color: #f5edff;
+  text-transform: uppercase;
+  text-shadow: 0 0 18px rgba(184, 116, 255, 0.45);
+  font-family: var(--font-display, "Outfit", system-ui, sans-serif);
+}
+
+.section--planes.plans-section > h2.plans-title.section__title--sci::before,
+.section--planes.plans-section > h2.plans-title.section__title--sci::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  flex: unset;
+  max-width: unset;
+  width: 150px;
+  height: 3px;
+  border-radius: 0;
+  background: linear-gradient(90deg, transparent, rgba(183, 93, 255, 0.95), transparent);
+  box-shadow: 0 0 18px rgba(183, 93, 255, 0.85);
+}
+
+.section--planes.plans-section > h2.plans-title.section__title--sci::before {
+  right: calc(50% + 130px);
+}
+
+.section--planes.plans-section > h2.plans-title.section__title--sci::after {
+  left: calc(50% + 130px);
+}
+
+@media (max-width: 720px) {
+  .section--planes.plans-section > h2.plans-title.section__title--sci::before,
+  .section--planes.plans-section > h2.plans-title.section__title--sci::after {
+    display: none;
+  }
+}
+
+.section--planes.plans-section .plans.plans-grid:not(.plans--checkout) {
+  display: grid;
+  grid-template-columns: repeat(3, 436px);
+  gap: 20px;
+  justify-content: center;
+  align-items: start;
+  max-width: none;
+  margin: 0 auto;
+}
+
+@media (max-width: 1200px) {
+  .section--planes.plans-section .plans.plans-grid:not(.plans--checkout) {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+}
+
+/* Tarjetas (grilla principal) */
+.section--planes.plans-section .plans.plans-grid:not(.plans--checkout) > .plan-card,
+.section--planes.plans-section .plans.plans-grid.plans--checkout > article.plan-card.plan-card--checkout-focus:not(.plan-card--hidden) {
+  width: 436px;
+  min-height: 446px;
+  padding: 38px 32px 90px;
+  border-radius: 18px;
+  box-sizing: border-box;
+  background-color: transparent;
+  background-image: none !important;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background: radial-gradient(circle at 50% 0%, rgba(141, 68, 255, 0.22), rgba(19, 9, 35, 0.88) 38%, rgba(6, 4, 13, 0.98) 100%);
+  border: 1px solid rgba(171, 96, 255, 0.48);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.035), 0 0 32px rgba(128, 54, 255, 0.18), 0 20px 44px rgba(0, 0, 0, 0.55);
+  overflow: hidden;
+  transform: none;
+}
+
+.section--planes.plans-section .plans.plans-grid:not(.plans--checkout) > .plan-card:hover:not(.plan-card--hidden),
+.section--planes.plans-section .plans.plans-grid.plans--checkout > article.plan-card.plan-card--checkout-focus:not(.plan-card--hidden):hover {
+  transform: translateY(-2px);
+  border-color: rgba(194, 123, 255, 0.62);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.045), 0 0 40px rgba(128, 54, 255, 0.26), 0 22px 48px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 1200px) {
+  .section--planes.plans-section .plans.plans-grid:not(.plans--checkout) > .plan-card,
+.section--planes.plans-section .plans.plans-grid.plans--checkout > article.plan-card.plan-card--checkout-focus:not(.plan-card--hidden) {
+    width: min(436px, calc(100vw - 32px));
+  }
+}
+
+/* Esquinas HUD */
+.section--planes.plans-section .plan-corner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-color: rgba(238, 222, 255, 0.9);
+  pointer-events: none;
+  opacity: 0.9;
+  z-index: 2;
+}
+
+.section--planes.plans-section .plan-corner.tl {
+  top: 14px;
+  left: 14px;
+  border-top: 2px solid;
+  border-left: 2px solid;
+}
+
+.section--planes.plans-section .plan-corner.tr {
+  top: 14px;
+  right: 14px;
+  border-top: 2px solid;
+  border-right: 2px solid;
+}
+
+.section--planes.plans-section .plan-corner.bl {
+  bottom: 14px;
+  left: 14px;
+  border-bottom: 2px solid;
+  border-left: 2px solid;
+}
+
+.section--planes.plans-section .plan-corner.br {
+  bottom: 14px;
+  right: 14px;
+  border-bottom: 2px solid;
+  border-right: 2px solid;
+}
+
+/* Badge POPULAR */
+.section--planes.plans-section .popular-badge.plan-card__badge,
+.section--planes.plans-section .plan-card__badge.popular-badge {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  left: auto;
+  height: 30px;
+  padding: 0 18px;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #a257ff 0%, #7430dd 100%);
+  border: 1px solid rgba(231, 200, 255, 0.38);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 18px rgba(157, 71, 255, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  z-index: 6;
+  line-height: 1;
+}
+
+/* Área icono + hex (::before) */
+.section--planes.plans-section .plans.plans-grid:not(.plans--checkout) .plan-card__icon.plan-icon-wrap.plan-card__icon--hex,
+.section--planes.plans-section .plans.plans-grid.plans--checkout > article.plan-card.plan-card--checkout-focus:not(.plan-card--hidden) .plan-card__icon.plan-icon-wrap.plan-card__icon--hex,
+.flow-panel .flow-plan-strip__icon-mount.selected-plan-icon .selected-plan-icon-hex .plan-card__icon.plan-icon-wrap.plan-card__icon--hex:not(.plan-card__icon--featured) {
+  --plan-ico: 128px;
+  display: flex !important;
+  width: 128px !important;
+  height: 128px !important;
+  max-width: 128px !important;
+  max-height: 128px !important;
+  margin: 0 auto 18px !important;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  clip-path: none !important;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+.section--planes.plans-section .plans.plans-grid:not(.plans--checkout) .plan-icon-wrap::before,
+.section--planes.plans-section .plans.plans-grid.plans--checkout > article.plan-card.plan-card--checkout-focus:not(.plan-card--hidden) .plan-icon-wrap::before,
+.flow-panel .flow-plan-strip__icon-mount.selected-plan-icon .selected-plan-icon-hex .plan-icon-wrap.plan-card__icon--hex:not(.plan-card__icon--featured)::before {
+  content: "";
+  position: absolute;
+  width: 112px;
+  height: 98px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  clip-path: polygon(50% 0%, 94% 25%, 94% 75%, 50% 100%, 6% 75%, 6% 25%);
+  border: none !important;
+  background: radial-gradient(circle at center, rgba(190, 118, 255, 0.26), rgba(103, 42, 185, 0.17) 54%, rgba(35, 12, 66, 0.04) 100%);
+  box-shadow:
+    0 0 0 1px rgba(198, 135, 255, 0.42),
+    0 0 18px rgba(170, 82, 255, 0.38),
+    inset 0 0 20px rgba(186, 108, 255, 0.14);
+  opacity: 0.95;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.section--planes.plans-section .plans.plans-grid:not(.plans--checkout) .plan-icon-wrap .plan-icon-svg,
+.section--planes.plans-section .plans.plans-grid:not(.plans--checkout) .plan-icon-svg.plan-card__icon-art,
+.section--planes.plans-section .plans.plans-grid.plans--checkout > article.plan-card.plan-card--checkout-focus:not(.plan-card--hidden) .plan-icon-wrap .plan-icon-svg,
+.section--planes.plans-section .plans.plans-grid.plans--checkout > article.plan-card.plan-card--checkout-focus:not(.plan-card--hidden) .plan-icon-svg.plan-card__icon-art,
+.flow-panel .flow-plan-strip__icon-mount.selected-plan-icon .selected-plan-icon-hex .plan-icon-wrap:not(.plan-card__icon--featured) .plan-icon-svg,
+.flow-panel .flow-plan-strip__icon-mount.selected-plan-icon .selected-plan-icon-hex .plan-icon-wrap:not(.plan-card__icon--featured) .plan-icon-svg.plan-card__icon-art {
+  position: relative;
+  z-index: 2;
+  width: 76px !important;
+  height: 76px !important;
+  max-width: 76px !important;
+  max-height: 76px !important;
+  flex-shrink: 0;
+  stroke: #f7efff;
+  stroke-width: 3.6;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 7px rgba(255, 255, 255, 0.7)) drop-shadow(0 0 18px rgba(181, 98, 255, 0.95)) !important;
+}
+
+.section--planes.plans-section .plan-icon-wrap .plan-card__icon-glow,
+.section--planes.plans-section .plan-icon-wrap .plan-card__icon-hex,
+.flow-panel .flow-plan-strip__icon-mount.selected-plan-icon .selected-plan-icon-hex .plan-icon-wrap .plan-card__icon-glow,
+.flow-panel .flow-plan-strip__icon-mount.selected-plan-icon .selected-plan-icon-hex .plan-icon-wrap .plan-card__icon-hex {
+  display: none !important;
+}
+
+/* Quitar animaciones legacy del contenedor icono */
+.section--planes.plans-section .plan-icon-wrap.plan-card__icon--hex,
+.flow-panel .flow-plan-strip__icon-mount.selected-plan-icon .selected-plan-icon-hex .plan-icon-wrap.plan-card__icon--hex {
+  animation: none !important;
+}
+
+/* Tipografía contenido */
+.section--planes.plans-section .plans.plans-grid:not(.plans--checkout) .plan-name.plan-card__name,
+.section--planes.plans-section .plans.plans-grid.plans--checkout > article.plan-card.plan-card--checkout-focus:not(.plan-card--hidden) .plan-name.plan-card__name {
+  margin: 0 auto 18px;
+  max-width: 360px;
+  text-align: center;
+  color: #ffffff;
+  font-size: 22px;
+  line-height: 1.28;
+  font-weight: 900;
+  letter-spacing: -0.2px;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.section--planes.plans-section .plans.plans-grid:not(.plans--checkout) .plan-price.plan-card__price,
+.section--planes.plans-section .plans.plans-grid.plans--checkout > article.plan-card.plan-card--checkout-focus:not(.plan-card--hidden) .plan-price.plan-card__price {
+  margin: 0;
+  text-align: center;
+  color: #bd78ff;
+  font-size: 30px;
+  line-height: 1;
+  font-weight: 900;
+  text-shadow: 0 0 18px rgba(179, 93, 255, 0.45);
+}
+
+.section--planes.plans-section .plans.plans-grid:not(.plans--checkout) .plan-usdt.plan-card__price--alt,
+.section--planes.plans-section .plans.plans-grid.plans--checkout > article.plan-card.plan-card--checkout-focus:not(.plan-card--hidden) .plan-usdt.plan-card__price--alt {
+  margin: 8px 0 0;
+  text-align: center;
+  color: #ffffff;
+  font-size: 19px;
+  line-height: 1;
+  font-weight: 900;
+  opacity: 1;
+}
+
+.section--planes.plans-section .plans.plans-grid:not(.plans--checkout) .plan-description.plan-card__desc,
+.section--planes.plans-section .plans.plans-grid.plans--checkout > article.plan-card.plan-card--checkout-focus:not(.plan-card--hidden) .plan-description.plan-card__desc {
+  min-height: 48px;
+  margin: 25px auto 0;
+  max-width: 340px;
+  text-align: center;
+  color: #aab5c8;
+  font-size: 17px;
+  line-height: 1.45;
+  font-weight: 500;
+}
+
+.section--planes.plans-section .plans.plans-grid:not(.plans--checkout) .plan-card__copy,
+.section--planes.plans-section .plans.plans-grid.plans--checkout > article.plan-card.plan-card--checkout-focus:not(.plan-card--hidden) .plan-card__copy {
+  width: 100%;
+  text-align: center;
+  padding-inline: 0;
+}
+
+.section--planes.plans-section .plans.plans-grid:not(.plans--checkout) .plan-card__copy--featured,
+.section--planes.plans-section .plans.plans-grid.plans--checkout > article.plan-card.plan-card--checkout-focus:not(.plan-card--hidden) .plan-card__copy--featured {
+  padding-inline: 0;
+}
+
+/* Botón */
+.section--planes.plans-section .plans.plans-grid:not(.plans--checkout) > .plan-card > .plan-button.plan-card__btn,
+.section--planes.plans-section .plans.plans-grid.plans--checkout > article.plan-card.plan-card--checkout-focus:not(.plan-card--hidden) > .plan-button.plan-card__btn {
+  position: absolute;
+  left: 32px;
+  right: 32px;
+  bottom: 26px;
+  height: 56px;
+  width: auto;
+  margin-top: 0;
+  border-radius: 11px;
+  border: 1px solid rgba(221, 177, 255, 0.42);
+  background: linear-gradient(90deg, #5d20bf 0%, #7b2cef 45%, #a64cff 100%);
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  box-shadow: 0 0 22px rgba(152, 64, 255, 0.52), inset 0 1px 0 rgba(255, 255, 255, 0.24);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 52px 0 24px;
+  gap: 0;
+}
+
+.section--planes.plans-section .plans.plans-grid:not(.plans--checkout) > .plan-card > .plan-button.plan-card__btn:hover:not(:disabled),
+.section--planes.plans-section .plans.plans-grid.plans--checkout > article.plan-card.plan-card--checkout-focus:not(.plan-card--hidden) > .plan-button.plan-card__btn:hover:not(:disabled) {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+  box-shadow: 0 0 28px rgba(152, 64, 255, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.28);
+}
+
+.section--planes.plans-section .plan-button .plan-card__btn-chevron.arrow {
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  flex: none;
+  margin: 0;
+  font-size: 22px;
+  line-height: 1;
+  font-weight: 300;
+  color: #ffffff;
+  opacity: 1;
+}
+
+.section--planes.plans-section .plan-button .plan-card__btn-label {
+  flex: none;
+  text-align: center;
+}
+
+/* Alineación grilla: cards laterales vs central (solo .plans.plans-grid checkout off) */
+.section--planes.plans-section .plans.plans-grid:not(.plans--checkout) {
+  align-items: stretch !important;
+}
+
+.section--planes.plans-section .plans.plans-grid:not(.plans--checkout) > .plan-card,
+.section--planes.plans-section .plans.plans-grid.plans--checkout > article.plan-card.plan-card--checkout-focus:not(.plan-card--hidden) {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+}
+
+.section--planes.plans-section .plans.plans-grid:not(.plans--checkout) > .plan-card:not(.featured),
+.section--planes.plans-section .plans.plans-grid.plans--checkout > article.plan-card.plan-card--checkout-focus:not(.plan-card--hidden):not(.featured) {
+  min-height: 520px !important;
+  padding-bottom: 28px !important;
+}
+
+.section--planes.plans-section .plans.plans-grid:not(.plans--checkout) > .plan-card:not(.featured) .plan-name,
+.section--planes.plans-section .plans.plans-grid.plans--checkout > article.plan-card.plan-card--checkout-focus:not(.plan-card--hidden):not(.featured) .plan-name {
+  margin-bottom: 18px !important;
+}
+
+.section--planes.plans-section .plans.plans-grid:not(.plans--checkout) > .plan-card:not(.featured) .plan-description,
+.section--planes.plans-section .plans.plans-grid.plans--checkout > article.plan-card.plan-card--checkout-focus:not(.plan-card--hidden):not(.featured) .plan-description {
+  margin-top: 22px !important;
+}
+
+.section--planes.plans-section .plans.plans-grid:not(.plans--checkout) > .plan-card:not(.featured) > .plan-button.plan-card__btn,
+.section--planes.plans-section .plans.plans-grid.plans--checkout > article.plan-card.plan-card--checkout-focus:not(.plan-card--hidden):not(.featured) > .plan-button.plan-card__btn {
+  position: absolute !important;
+  left: 36px !important;
+  right: 36px !important;
+  bottom: 30px !important;
+  height: 58px !important;
+  min-height: 58px !important;
+  width: auto !important;
+  padding: 0 24px !important;
+  border-radius: 14px !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+
+  font-size: 16px !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.8px !important;
+  line-height: 1 !important;
+}
+
+.section--planes.plans-section .plans.plans-grid:not(.plans--checkout) > .plan-card:not(.featured) .plan-button .arrow,
+.section--planes.plans-section .plans.plans-grid.plans--checkout > article.plan-card.plan-card--checkout-focus:not(.plan-card--hidden):not(.featured) .plan-button .arrow {
+  position: absolute !important;
+  right: 22px !important;
+  font-size: 22px !important;
+  line-height: 1 !important;
+}

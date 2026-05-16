@@ -1,0 +1,262 @@
+/* =========================
+   BOTONES CAMBIAR (strip «Tu plan»)
+   ========================= */
+
+button.change-action-btn {
+  margin: 0;
+  font: inherit;
+  -webkit-appearance: none;
+  appearance: none;
+  text-align: left;
+}
+
+/* Gana a .change-action-btn { display: inline-flex } hasta elegir QR/Binance */
+#flowCambiarMetodoBtn.is-hidden-until-method,
+.change-action-btn.js-cambiar-metodo.is-hidden-until-method {
+  display: none !important;
+}
+
+.change-action-btn {
+  --border-glow: #b97cff;
+  --border-main: #b77cff;
+  --border-soft: rgba(208, 160, 255, 0.32);
+  --bg-dark-top: rgba(34, 16, 71, 0.92);
+  --bg-dark-bottom: rgba(15, 8, 35, 0.98);
+  --text-color: #f6f1ff;
+  --icon-glow: rgba(191, 126, 255, 0.95);
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.55rem;
+  height: 50px;
+  padding: 0 1.05rem 0 0.85rem;
+  border-radius: 999px;
+  border: 1.5px solid var(--border-main);
+  background:
+    linear-gradient(180deg, var(--bg-dark-top) 0%, var(--bg-dark-bottom) 100%);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.03) inset,
+    0 0 12px rgba(161, 79, 255, 0.2),
+    0 0 22px rgba(138, 57, 241, 0.12),
+    0 6px 16px rgba(0,0,0,0.32);
+  color: var(--text-color);
+  text-decoration: none;
+  overflow: hidden;
+  isolation: isolate;
+  cursor: pointer;
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease,
+    border-color .2s ease;
+}
+
+.change-action-btn:hover {
+  transform: translateY(-1px);
+  border-color: #d29dff;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.05) inset,
+    0 0 16px rgba(179, 102, 255, 0.26),
+    0 0 28px rgba(157, 72, 255, 0.18),
+    0 8px 20px rgba(0,0,0,0.38);
+}
+
+.change-action-btn:active {
+  transform: translateY(0);
+}
+
+.change-action-btn:focus-visible {
+  outline: 2px solid rgba(224, 200, 255, 0.95);
+  outline-offset: 3px;
+}
+
+.change-action-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* capa interior */
+.change-action-btn::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border-radius: 999px;
+  border: 1px solid rgba(213, 177, 255, 0.08);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* glow exterior suave */
+.change-action-btn::after {
+  content: "";
+  position: absolute;
+  inset: auto 10px -8px 10px;
+  height: 18px;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(173, 89, 255, 0.35) 0%, rgba(173, 89, 255, 0.1) 45%, rgba(173, 89, 255, 0) 75%);
+  filter: blur(8px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* tamaños (pill compacto, mismo ratio largo/corto que antes del diseño grande) */
+.change-action-btn--method {
+  width: auto;
+  max-width: min(100%, 300px);
+  min-width: 0;
+}
+
+.change-action-btn--plan {
+  width: auto;
+  max-width: min(100%, 200px);
+  min-width: 0;
+}
+
+/* contenido */
+.change-action-btn__content {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  width: 100%;
+}
+
+/* flecha */
+.change-action-btn__icon {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.change-action-btn__icon svg {
+  width: 24px;
+  height: 24px;
+  display: block;
+  filter:
+    drop-shadow(0 0 2px rgba(255,255,255,0.35))
+    drop-shadow(0 0 6px rgba(183, 120, 255, 0.65))
+    drop-shadow(0 0 12px rgba(150, 70, 255, 0.35));
+}
+
+/* texto */
+.change-action-btn__text {
+  color: #f7f2ff;
+  font-family: var(--font-display, "Rajdhani", "Outfit", system-ui, sans-serif);
+  font-size: clamp(0.7rem, 1.85vw, 0.82rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-shadow: 0 0 8px rgba(255,255,255,0.04);
+}
+
+/* detalles decorativos internos */
+.change-action-btn__decor-top,
+.change-action-btn__decor-bottom {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(72%, 150px);
+  height: 9px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.change-action-btn__decor-top {
+  top: 7px;
+}
+
+.change-action-btn__decor-bottom {
+  bottom: 7px;
+}
+
+.change-action-btn__decor-top::before,
+.change-action-btn__decor-bottom::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(0 50%, 8% 0, 92% 0, 100% 50%, 92% 100%, 8% 100%);
+  border: 1px solid rgba(191, 132, 255, 0.18);
+  background: linear-gradient(90deg, rgba(165, 88, 255, 0.00), rgba(165, 88, 255, 0.12), rgba(165, 88, 255, 0.00));
+  opacity: 0.55;
+}
+
+.change-action-btn__decor-top::after,
+.change-action-btn__decor-bottom::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 18%;
+  right: 18%;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(196, 139, 255, 0), rgba(196, 139, 255, 0.75), rgba(196, 139, 255, 0));
+  opacity: 0.55;
+}
+
+/* variante compacta para el botón corto */
+.change-action-btn--plan .change-action-btn__text {
+  font-size: clamp(0.68rem, 1.8vw, 0.8rem);
+  letter-spacing: 0.1em;
+}
+
+.change-action-btn--plan .change-action-btn__decor-top,
+.change-action-btn--plan .change-action-btn__decor-bottom {
+  width: min(78%, 110px);
+}
+
+/* responsive */
+@media (max-width: 1100px) {
+  .change-action-btn--method {
+    width: 100%;
+    max-width: min(100%, 300px);
+  }
+
+  .change-action-btn--plan {
+    width: 100%;
+    max-width: min(100%, 200px);
+  }
+}
+
+@media (max-width: 768px) {
+  .change-action-btn {
+    height: 46px;
+    padding: 0 0.85rem 0 0.75rem;
+    gap: 0.4rem;
+  }
+
+  .change-action-btn__content {
+    gap: 0.4rem;
+  }
+
+  .change-action-btn__icon {
+    width: 20px;
+    height: 20px;
+    flex-basis: 20px;
+  }
+
+  .change-action-btn__icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .change-action-btn__text {
+    font-size: clamp(0.62rem, 2.8vw, 0.74rem);
+    letter-spacing: 0.08em;
+  }
+}
+
+@media (max-width: 600px) {
+  .flow-plan-strip__actions .change-action-btn {
+    flex: 1 1 auto;
+    justify-content: flex-start;
+    min-width: 0;
+  }
+}

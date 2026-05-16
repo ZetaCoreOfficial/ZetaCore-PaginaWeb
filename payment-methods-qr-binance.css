@@ -1,0 +1,469 @@
+/**
+ * Métodos de pago — compacto, referencia qr_binance (solo esta sección).
+ */
+
+/* CONTENEDOR GENERAL */
+.payment-methods-section {
+  position: relative;
+  width: 100%;
+  max-width: 1360px !important;
+  margin: 28px auto clamp(20px, 4vw, 36px) !important;
+  padding: 24px 28px 32px !important;
+  border-radius: 24px !important;
+  background: linear-gradient(180deg, rgba(15, 7, 32, 0.98) 0%, rgba(6, 4, 14, 1) 100%);
+  border: 1px solid rgba(165, 93, 255, 0.62);
+  box-shadow:
+    0 0 0 1px rgba(215, 155, 255, 0.06) inset,
+    0 0 24px rgba(143, 63, 255, 0.25),
+    0 0 80px rgba(124, 45, 255, 0.16),
+    0 18px 45px rgba(0, 0, 0, 0.42);
+  overflow: hidden;
+}
+
+/* TITULO */
+.payment-methods-title {
+  margin: 0 0 22px 4px !important;
+  color: #b87aff;
+  font-size: 15px !important;
+  font-weight: 900;
+  letter-spacing: 5px !important;
+  text-transform: uppercase;
+}
+
+/* GRID */
+.payment-methods-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 24px !important;
+  align-items: stretch;
+}
+
+/* CARD (botón fila completa) */
+button.payment-method-card {
+  appearance: none;
+  -webkit-appearance: none;
+  font: inherit;
+  color: inherit;
+  text-align: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.payment-method-card {
+  position: relative;
+  min-height: 370px !important;
+  padding: 28px 28px 26px !important;
+  border-radius: 20px !important;
+  background: linear-gradient(180deg, rgba(8, 4, 20, 0.98) 0%, rgba(3, 2, 10, 1) 100%);
+  border: 1px solid rgba(136, 58, 235, 0.72);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.03),
+    0 0 22px rgba(127, 48, 255, 0.12),
+    0 14px 36px rgba(0, 0, 0, 0.34);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: hidden;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.25s ease;
+}
+
+.payment-method-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(200, 150, 255, 0.85);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04),
+    0 0 28px rgba(150, 70, 255, 0.22),
+    0 18px 40px rgba(0, 0, 0, 0.38);
+}
+
+.payment-method-card.is-active {
+  border-color: rgba(233, 213, 254, 0.85);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+    0 0 0 1px rgba(168, 85, 247, 0.45),
+    0 0 40px rgba(168, 85, 247, 0.35),
+    0 0 72px rgba(91, 33, 182, 0.22),
+    0 14px 36px rgba(0, 0, 0, 0.34);
+}
+
+.payment-method-card:focus-visible {
+  outline: 2px solid rgba(216, 180, 254, 0.95);
+  outline-offset: 3px;
+}
+
+/* BADGE RECOMENDADO */
+.payment-method-badge {
+  position: absolute;
+  top: 24px !important;
+  right: 24px !important;
+  height: 32px !important;
+  padding: 0 16px !important;
+  border-radius: 9px !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: linear-gradient(180deg, #b56bff 0%, #8d42ef 100%);
+  border: 1px solid rgba(238, 210, 255, 0.28);
+  color: #ffffff;
+  font-size: 11px !important;
+  font-weight: 900;
+  letter-spacing: 1.2px !important;
+  text-transform: uppercase;
+  box-shadow:
+    0 0 18px rgba(163, 77, 255, 0.45),
+    0 0 34px rgba(140, 57, 255, 0.16);
+  pointer-events: none;
+}
+
+.payment-method-badge__star {
+  flex-shrink: 0;
+  width: 11px;
+  height: 11px;
+  opacity: 0.95;
+}
+
+/* ZONA ICONO */
+.payment-method-icon-wrap {
+  width: 100%;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-top: 4px !important;
+  margin-bottom: 18px !important;
+  min-height: 112px !important;
+}
+
+.payment-method-icon-hex {
+  position: relative !important;
+  width: 112px !important;
+  height: 98px !important;
+  clip-path: polygon(50% 0%, 92% 25%, 92% 75%, 50% 100%, 8% 75%, 8% 25%) !important;
+  border: none !important;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(139, 64, 255, 0.32), rgba(55, 19, 111, 0.2) 58%, rgba(13, 6, 28, 0.1) 100%) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  /* Borde con anillo (evita el “brillito” en punta por border+clip-path); aplica a QR y Binance */
+  box-shadow:
+    0 0 0 1.5px rgba(158, 86, 255, 0.58),
+    0 0 14px rgba(150, 75, 255, 0.22),
+    inset 0 0 14px rgba(194, 128, 255, 0.06) !important;
+}
+
+/* QR BOLIVIA — más grande y centrado en el hexágono (no tocar reglas Binance) */
+.payment-method-icon-hex.qr {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.payment-method-icon-hex.qr svg,
+.payment-method-icon-hex .payment-qr-icon {
+  width: 92px !important;
+  height: 92px !important;
+  max-width: 92px !important;
+  max-height: 92px !important;
+  display: block !important;
+  margin: 0 !important;
+  flex-shrink: 0 !important;
+  aspect-ratio: 1 / 1 !important;
+  transform: none !important;
+  transform-origin: center !important;
+  shape-rendering: geometricPrecision !important;
+  filter:
+    drop-shadow(0 0 7px rgba(255, 255, 255, 0.42))
+    drop-shadow(0 0 14px rgba(170, 95, 255, 0.58)) !important;
+}
+
+/* BINANCE USDT */
+.payment-method-icon-hex.binance {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.payment-binance-icon {
+  width: 58px !important;
+  height: 58px !important;
+  display: block !important;
+  transform: translateY(-1px) !important;
+  shape-rendering: geometricPrecision !important;
+  overflow: visible !important;
+  filter:
+    drop-shadow(0 0 5px rgba(243, 186, 47, 0.42))
+    drop-shadow(0 0 10px rgba(243, 186, 47, 0.35))
+    drop-shadow(0 0 16px rgba(243, 186, 47, 0.22)) !important;
+}
+
+.payment-method-icon-hex.binance svg {
+  width: 58px !important;
+  height: 58px !important;
+  max-width: 58px !important;
+  max-height: 58px !important;
+}
+
+/* TITULO CARD */
+.payment-method-name {
+  margin: 0 0 12px !important;
+  color: #ffffff;
+  text-align: center;
+  font-size: 25px !important;
+  font-weight: 900;
+  line-height: 1.1;
+}
+
+/* DESCRIPCION */
+.payment-method-description {
+  margin: 0 auto 26px !important;
+  max-width: 560px !important;
+  color: #b9bfd0;
+  text-align: center;
+  font-size: 16px !important;
+  line-height: 1.45 !important;
+  font-weight: 500;
+}
+
+/* BOTÓN inferior: mismo sistema que zeta-plan-btn (anillo LED ::before + .zeta-plan-btn__face equivalente) */
+.payment-methods-section .payment-method-button {
+  --zc-ch: 13px;
+  --zc-ch-in: max(6px, calc(var(--zc-ch) - 2px));
+  --zc-ring: 2px;
+
+  position: relative !important;
+  display: block !important;
+  margin-top: auto !important;
+  width: 100% !important;
+  min-height: 64px !important;
+  height: 64px !important;
+  max-height: none !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+  border: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: #f4e9ff !important;
+  overflow: visible !important;
+  isolation: isolate !important;
+  cursor: inherit !important;
+  filter: none !important;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.45) !important;
+  transition: transform 0.16s ease, box-shadow 0.2s ease !important;
+}
+
+.payment-methods-section .payment-method-button::before {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+  box-sizing: border-box !important;
+
+  clip-path: polygon(
+    var(--zc-ch) 0,
+    calc(100% - var(--zc-ch)) 0,
+    100% var(--zc-ch),
+    100% calc(100% - var(--zc-ch)),
+    calc(100% - var(--zc-ch)) 100%,
+    var(--zc-ch) 100%,
+    0 calc(100% - var(--zc-ch)),
+    0 var(--zc-ch)
+  ) !important;
+
+  background: linear-gradient(
+    135deg,
+    #faf5ff 0%,
+    #e9d5ff 18%,
+    #d8b4fe 38%,
+    #a855f7 62%,
+    #7c3aed 82%,
+    #5b21b6 100%
+  ) !important;
+
+  box-shadow:
+    0 0 10px rgba(200, 130, 255, 0.55),
+    0 0 22px rgba(150, 75, 230, 0.35),
+    0 0 36px rgba(100, 45, 180, 0.18) !important;
+}
+
+.payment-methods-section .payment-method-button::after {
+  content: none !important;
+  display: none !important;
+}
+
+.payment-methods-section .payment-method-button__face {
+  position: absolute !important;
+  top: var(--zc-ring) !important;
+  left: var(--zc-ring) !important;
+  right: var(--zc-ring) !important;
+  bottom: var(--zc-ring) !important;
+  z-index: 1 !important;
+  box-sizing: border-box !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+
+  padding: 0 56px 0 40px !important;
+
+  clip-path: polygon(
+    var(--zc-ch-in) 0,
+    calc(100% - var(--zc-ch-in)) 0,
+    100% var(--zc-ch-in),
+    100% calc(100% - var(--zc-ch-in)),
+    calc(100% - var(--zc-ch-in)) 100%,
+    var(--zc-ch-in) 100%,
+    0 calc(100% - var(--zc-ch-in)),
+    0 var(--zc-ch-in)
+  ) !important;
+
+  background:
+    radial-gradient(ellipse 85% 120% at 50% 45%, rgba(120, 55, 210, 0.35) 0%, transparent 55%),
+    linear-gradient(180deg, rgba(38, 14, 72, 0.98) 0%, rgba(8, 3, 22, 0.99) 100%) !important;
+}
+
+.payment-methods-section .payment-method-button__content {
+  position: relative !important;
+  z-index: 2 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  transform: translateX(-6px) !important;
+}
+
+.payment-methods-section .payment-method-button__text {
+  font-family: var(--font-display, "Rajdhani", "Outfit", system-ui, sans-serif) !important;
+  font-size: clamp(12px, 2.1vw, 15px) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.32em !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+  text-transform: uppercase !important;
+  color: #faf5ff !important;
+  text-shadow:
+    0 0 8px rgba(255, 255, 255, 0.2),
+    0 0 18px rgba(180, 110, 255, 0.45),
+    0 0 28px rgba(130, 60, 220, 0.25) !important;
+}
+
+.payment-methods-section .payment-method-button__arrow {
+  position: absolute !important;
+  right: 16px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  width: 34px !important;
+  height: 34px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 3 !important;
+}
+
+.payment-methods-section .payment-method-button__arrow svg {
+  width: 34px !important;
+  height: 34px !important;
+  display: block !important;
+  filter:
+    drop-shadow(0 0 1px rgba(255, 255, 255, 0.35))
+    drop-shadow(0 0 5px rgba(190, 150, 255, 0.45))
+    drop-shadow(0 0 10px rgba(120, 70, 190, 0.3));
+}
+
+.payment-method-card:hover .payment-method-button__arrow svg {
+  filter:
+    drop-shadow(0 0 2px rgba(255, 255, 255, 0.5))
+    drop-shadow(0 0 6px rgba(216, 180, 254, 0.55))
+    drop-shadow(0 0 11px rgba(168, 85, 247, 0.48));
+}
+
+.payment-method-card:hover .payment-method-button {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5) !important;
+}
+
+.payment-method-card:hover .payment-method-button::before {
+  filter: brightness(1.1) saturate(1.08) !important;
+  box-shadow:
+    0 0 14px rgba(220, 160, 255, 0.65),
+    0 0 28px rgba(170, 90, 240, 0.42),
+    0 0 44px rgba(110, 50, 190, 0.22) !important;
+}
+
+@media (max-width: 480px) {
+  .payment-methods-section .payment-method-button {
+    --zc-ch: 10px;
+    --zc-ch-in: max(5px, calc(var(--zc-ch) - 2px));
+    --zc-ring: 2px;
+    min-height: 56px !important;
+    height: 56px !important;
+  }
+
+  .payment-methods-section .payment-method-button__face {
+    padding: 0 48px 0 32px !important;
+  }
+
+  .payment-methods-section .payment-method-button__text {
+    letter-spacing: 0.22em !important;
+  }
+
+  .payment-methods-section .payment-method-button__arrow,
+  .payment-methods-section .payment-method-button__arrow svg {
+    width: 28px !important;
+    height: 28px !important;
+  }
+
+  .payment-methods-section .payment-method-button__arrow {
+    right: 12px !important;
+  }
+}
+
+/* RESPONSIVE — móvil: una columna (QR arriba, Binance abajo); la regla base usa 2 cols con !important */
+@media (max-width: 768px) {
+  .payment-methods-grid {
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+  }
+
+  .payment-method-card {
+    min-height: 300px !important;
+    padding: 22px 18px 22px !important;
+  }
+
+  .payment-methods-section {
+    padding: 20px 16px 26px !important;
+  }
+
+  .payment-method-badge {
+    top: 16px !important;
+    left: 16px !important;
+    right: auto !important;
+    max-width: calc(100% - 32px);
+    padding: 0 12px !important;
+    font-size: 10px !important;
+    letter-spacing: 0.08em !important;
+  }
+
+  .payment-method-name {
+    font-size: 22px !important;
+  }
+
+  .payment-method-description {
+    font-size: 15px !important;
+    margin-bottom: 20px !important;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1200px) {
+  .payment-method-card {
+    min-height: 340px !important;
+  }
+}
+
+/* Aire entre bloque «MÉTODOS DE PAGO» y barra de beneficios (RÁPIDO, SEGURO, …) */
+.payment-methods-section ~ .benefits-bar {
+  margin-top: clamp(18px, 3.5vw, 36px) !important;
+}

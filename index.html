@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>ZetaCore · Play Without Limits</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Rajdhani:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css?v=18" />
+    <link rel="stylesheet" href="ui-aaa.css?v=53" />
+    <link rel="stylesheet" href="change-action-buttons.css?v=5" />
+    <link rel="stylesheet" href="payment-methods-qr-binance.css?v=17" />
+    <link rel="stylesheet" href="planes-spec.css?v=23" />
+    <link rel="stylesheet" href="perma-hero.css?v=14" />
+    <link rel="stylesheet" href="planes-layout-fix.css?v=5" />
+    <link rel="stylesheet" href="faq-spec.css?v=17" />
+    <link rel="stylesheet" href="zeta-plan-btn.css?v=11" />
+    <link rel="stylesheet" href="popular-badge.css?v=5" />
+  </head>
+  <body>
+    <svg
+      class="zc-icon-defs"
+      xmlns="http://www.w3.org/2000/svg"
+      width="0"
+      height="0"
+      aria-hidden="true"
+      focusable="false"
+      style="position: absolute; overflow: hidden; clip-path: inset(50%)"
+    >
+      <defs>
+        <linearGradient id="zcNeonNavStroke" x1="2" y1="3" x2="22" y2="21" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#faf5ff" />
+          <stop offset="42%" stop-color="#d8b4fe" />
+          <stop offset="100%" stop-color="#6d28d9" />
+        </linearGradient>
+        <linearGradient id="zcNeonUpStroke" x1="4" y1="20" x2="20" y2="2" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#faf5ff" />
+          <stop offset="50%" stop-color="#c4b5fd" />
+          <stop offset="100%" stop-color="#5b21b6" />
+        </linearGradient>
+        <!-- Flecha subir en badge comprobante: mismo morado ZetaCore, trazo más claro que zcNeonUpStroke -->
+        <linearGradient id="zcNeonUpBadgeStroke" x1="4" y1="20" x2="20" y2="2" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#ffffff" />
+          <stop offset="35%" stop-color="#faf5ff" />
+          <stop offset="68%" stop-color="#e9d5ff" />
+          <stop offset="100%" stop-color="#c084fc" />
+        </linearGradient>
+      </defs>
+    </svg>
+    <div class="bg-grid" aria-hidden="true"></div>
+    <div class="bg-glow bg-glow--1" aria-hidden="true"></div>
+    <div class="bg-glow bg-glow--2" aria-hidden="true"></div>
+
+    <header class="header">
+      <div class="header__brand">
+        <span class="header__logo-wrap">
+          <img
+            class="header__logo"
+            src="assets/zetacore-logo-transparent.png?v=4"
+            alt="ZetaCore"
+            width="512"
+            height="512"
+            decoding="async"
+          />
+        </span>
+      </div>
+      <h1 class="header__title">
+        <span class="header__title-zc">ZetaCore</span><span class="header__title-rest"> - Play Without Limits</span>
+      </h1>
+      <p class="header__subtitle">
+        Accede a juegos de Steam de forma rápida, sencilla y con soporte personalizado.
+      </p>
+
+      <div class="hero-video-block">
+        <div class="hero-video-block__label-row">
+          <span class="hero-video-block__label-line" aria-hidden="true"></span>
+          <p class="hero-video-block__label">Demostración rápida</p>
+          <span class="hero-video-block__label-line hero-video-block__label-line--flip" aria-hidden="true"></span>
+        </div>
+        <div class="demo-shell" data-demo-player>
+          <div class="demo-shell__frame">
+            <div class="demo-shell__hud" aria-hidden="true">
+              <span class="demo-shell__hud-corner demo-shell__hud-corner--tl"></span>
+              <span class="demo-shell__hud-corner demo-shell__hud-corner--tr"></span>
+              <span class="demo-shell__hud-corner demo-shell__hud-corner--bl"></span>
+              <span class="demo-shell__hud-corner demo-shell__hud-corner--br"></span>
+              <span class="demo-shell__hud-glow demo-shell__hud-glow--top"></span>
+              <span class="demo-shell__hud-glow demo-shell__hud-glow--bottom"></span>
+            </div>
+            <div class="demo-shell__inner">
+              <div class="demo-shell__video-wrap">
+                <div class="demo-shell__media">
+                  <video
+                    id="heroDemoVideo"
+                    class="hero-video demo-shell__video"
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                    preload="metadata"
+                    controlslist="nodownload noremoteplayback noplaybackrate"
+                    disablepictureinpicture
+                    disableremoteplayback
+                    aria-label="Demostración visual de ZetaCore"
+                  >
+                    <source src="assets/zetacore-demo.mp4" type="video/mp4" />
+                  </video>
+                </div>
+                <div class="demo-shell__dock" aria-label="Controles del reproductor">
+                  <div class="demo-shell__dock-glass"></div>
+                  <div class="demo-shell__dock-row">
+                    <button type="button" class="demo-dock__btn demo-dock__btn--play" data-demo-action="toggle-play" aria-label="Pausar reproducción">
+                      <svg class="demo-dock__icon demo-dock__icon--pause" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                      <svg class="demo-dock__icon demo-dock__icon--play" hidden viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>
+                    </button>
+                    <button type="button" class="demo-dock__btn demo-dock__btn--seek demo-dock__btn--seek-back" data-demo-action="seek-back" aria-label="Retroceder 5 segundos">
+                      <svg class="demo-dock__seek-ico" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                        <path fill="currentColor" d="M11 18V6l-8.5 6 8.5 6zm9 0V6l-8.5 6 8.5 6z" />
+                      </svg>
+                      <span class="demo-dock__seek-cap">5</span>
+                    </button>
+                    <div class="demo-dock__seekbar">
+                      <div class="demo-dock__track" id="demoProgressTrack" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Barra de progreso del video">
+                        <div class="demo-dock__track-fill" id="demoProgressFill"></div>
+                        <div class="demo-dock__track-thumb" id="demoProgressThumb"></div>
+                      </div>
+                    </div>
+                    <span class="demo-dock__time" id="demoTimeCombined">0:00 / 0:00</span>
+                    <button type="button" class="demo-dock__btn demo-dock__btn--seek demo-dock__btn--seek-fwd" data-demo-action="seek-fwd" aria-label="Avanzar 5 segundos">
+                      <span class="demo-dock__seek-cap">5</span>
+                      <svg class="demo-dock__seek-ico" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                        <path fill="currentColor" d="M13 6v12l8.5-6L13 6zm-9 0v12l8.5-6L4 6z" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+                <div class="demo-dock__volume" id="demoVolumeRoot">
+                  <div class="demo-dock__vol-panel" id="demoVolumePanel" role="group" aria-label="Nivel de volumen" aria-hidden="true">
+                    <div class="demo-dock__vol-pct" id="demoVolPct" aria-hidden="true">0%</div>
+                    <div class="demo-dock__vol-track" id="demoVolTrack" role="slider" tabindex="0" aria-orientation="vertical" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Deslizar volumen">
+                      <div class="demo-dock__vol-range">
+                        <div class="demo-dock__vol-fill" id="demoVolFill"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <button type="button" class="demo-dock__btn demo-dock__btn--vol" id="demoVolBtn" aria-expanded="false" aria-controls="demoVolumePanel" aria-label="Volumen">
+                    <svg class="demo-dock__icon demo-dock__icon--vol-on" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+                    <svg class="demo-dock__icon demo-dock__icon--vol-muted" hidden viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM5 9v6h4l5 5V4L9 9H5z"/></svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <nav class="steps" aria-label="Pasos">
+      <div class="steps__track">
+        <div class="steps__item is-active" data-step="1">
+          <span class="steps__num">1</span>
+          <span class="steps__label">Elige plan</span>
+        </div>
+        <div class="steps__line" aria-hidden="true"></div>
+        <div class="steps__item" data-step="2">
+          <span class="steps__num">2</span>
+          <span class="steps__label">Elige método</span>
+        </div>
+        <div class="steps__line" aria-hidden="true"></div>
+        <div class="steps__item" data-step="3">
+          <span class="steps__num">3</span>
+          <span class="steps__label">Paga</span>
+        </div>
+        <div class="steps__line" aria-hidden="true"></div>
+        <div class="steps__item" data-step="4">
+          <span class="steps__num">4</span>
+          <span class="steps__label">Envía comprobante</span>
+        </div>
+      </div>
+    </nav>
+
+    <main class="main">
+      <section class="section section--planes plans-section" id="planes">
+        <h2 class="section__title section__title--sci plans-title" id="planesTitle">Planes</h2>
+        <p class="plan-selected-eyebrow" id="planSelectedEyebrow" hidden>PLAN SELECCIONADO</p>
+        <div class="plans plans-grid" id="planCards">
+          <article class="plan-card" data-plan="mensual">
+            <span class="plan-corner tl" aria-hidden="true"></span>
+            <span class="plan-corner tr" aria-hidden="true"></span>
+            <span class="plan-corner bl" aria-hidden="true"></span>
+            <span class="plan-corner br" aria-hidden="true"></span>
+            <div class="plan-card__top">
+              <div
+                class="plan-card__icon plan-icon-wrap plan-card__icon--hex plan-card__icon--mensual"
+                aria-hidden="true"
+              >
+                <svg
+                  class="plan-icon-svg plan-card__icon-art"
+                  viewBox="0 0 100 100"
+                  width="76"
+                  height="76"
+                  preserveAspectRatio="xMidYMid meet"
+                  focusable="false"
+                  role="presentation"
+                >
+                  <rect x="24" y="28" width="52" height="58" rx="8" />
+                  <line x1="24" y1="45" x2="76" y2="45" />
+                  <line x1="36" y1="18" x2="36" y2="34" />
+                  <line x1="64" y1="18" x2="64" y2="34" />
+                  <rect x="35" y="55" width="8" height="8" rx="1.5" fill="#f3eaff" stroke="none" />
+                  <rect x="47" y="55" width="8" height="8" rx="1.5" fill="#f3eaff" stroke="none" />
+                  <rect x="59" y="55" width="8" height="8" rx="1.5" fill="#f3eaff" stroke="none" />
+                  <rect x="35" y="69" width="8" height="8" rx="1.5" fill="#f3eaff" stroke="none" />
+                  <rect x="47" y="69" width="8" height="8" rx="1.5" fill="#f3eaff" stroke="none" />
+                  <rect x="59" y="69" width="8" height="8" rx="1.5" fill="#f3eaff" stroke="none" />
+                </svg>
+              </div>
+              <div class="plan-card__copy">
+                <h3 class="plan-card__name plan-name">Plan Mensual</h3>
+                <p class="plan-card__price plan-price"><span class="plan-card__amount">69</span> Bs</p>
+                <p class="plan-card__price plan-card__price--alt plan-usdt">
+                  <span class="plan-card__amount">10</span> USDT
+                </p>
+                <p class="plan-card__price-line" hidden>
+                  <span class="plan-card__line-bs">69</span> Bs / <span class="plan-card__line-usdt">10</span> USDT
+                </p>
+                <p class="plan-card__desc plan-description">Acceso mensual a ZetaCore.</p>
+              </div>
+              <button type="button" class="btn plan-card__change js-cambiar-plan" hidden>
+                <span class="plan-card__change-arrow" aria-hidden="true">
+                  <svg
+                    class="zc-neon-arrow zc-neon-arrow--left zc-neon-arrow--plan"
+                    viewBox="0 0 24 24"
+                    width="17"
+                    height="17"
+                    focusable="false"
+                  >
+                    <path
+                      d="M13.55 12H20.65"
+                      fill="none"
+                      stroke="url(#zcNeonNavStroke)"
+                      stroke-width="2.1"
+                      stroke-linecap="round"
+                    />
+                    <path
+                      d="M8.45 12L3.8 8.05M8.45 12L3.8 15.95"
+                      fill="none"
+                      stroke="url(#zcNeonNavStroke)"
+                      stroke-width="2.1"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <circle cx="10.85" cy="12" r="2.2" fill="url(#zcNeonNavStroke)" />
+                  </svg>
+                </span>
+                Cambiar plan
+              </button>
+            </div>
+            <button type="button" class="zeta-plan-btn plan-card__btn plan-button">
+              <span class="zeta-plan-btn__face">
+                <span class="zeta-plan-btn__content">
+                  <span class="zeta-plan-btn__text">Elegir plan</span>
+                </span>
+                <span class="zeta-plan-btn__arrow" aria-hidden="true">
+                  <svg viewBox="0 0 56 56" width="34" height="34" aria-hidden="true" focusable="false">
+                    <path
+                      d="M15 14l11.5 14L15 42M31 14l11.5 14L31 42"
+                      fill="none"
+                      stroke="url(#zcNeonNavStroke)"
+                      stroke-width="3.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </span>
+              </span>
+            </button>
+          </article>
+          <article class="plan-card featured plan-card--featured perma-hero-card" data-plan="permanente">
+            <span class="plan-corner tl" aria-hidden="true"></span>
+            <span class="plan-corner tr" aria-hidden="true"></span>
+            <span class="plan-corner bl" aria-hidden="true"></span>
+            <span class="plan-corner br" aria-hidden="true"></span>
+            <span class="plan-card__badge popular-badge" aria-hidden="true">POPULAR</span>
+            <div class="plan-card__top">
+              <div
+                class="plan-card__icon plan-icon-wrap plan-card__icon--hex plan-card__icon--featured"
+                aria-hidden="true"
+              >
+                <div class="perma-hero-icon">
+                  <div class="perma-energy perma-energy-left"></div>
+                  <div class="perma-energy perma-energy-right"></div>
+                  <div class="perma-hex perma-hex-outer"></div>
+                  <div class="perma-hex perma-hex-middle"></div>
+                  <div class="perma-hex perma-hex-inner"></div>
+
+                  <svg class="perma-shield-svg" viewBox="0 0 180 180" aria-hidden="true">
+                    <defs>
+                      <linearGradient id="permaShieldFillClean" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.28" />
+                        <stop offset="38%" stop-color="#ad63ff" stop-opacity="0.26" />
+                        <stop offset="100%" stop-color="#160727" stop-opacity="0.94" />
+                      </linearGradient>
+
+                      <linearGradient id="permaShieldStrokeClean" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#ffffff" />
+                        <stop offset="48%" stop-color="#f2deff" />
+                        <stop offset="100%" stop-color="#a14cff" />
+                      </linearGradient>
+
+                      <linearGradient id="permaZFillClean" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#f0d8ff" />
+                        <stop offset="45%" stop-color="#c26cff" />
+                        <stop offset="100%" stop-color="#8b38f5" />
+                      </linearGradient>
+
+                      <linearGradient id="permaZStrokeClean" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#fff8ff" />
+                        <stop offset="100%" stop-color="#b14dff" />
+                      </linearGradient>
+                    </defs>
+
+                    <path
+                      class="perma-shield-main"
+                      d="M90 18 L144 42 V80 C144 118 121 148 90 164 C59 148 36 118 36 80 V42 Z"
+                      fill="url(#permaShieldFillClean)"
+                      stroke="url(#permaShieldStrokeClean)"
+                      stroke-width="7"
+                      stroke-linejoin="round"
+                    />
+
+                    <path
+                      class="perma-shield-inner"
+                      d="M90 31 L129 49 V81 C129 109 112 133 90 147 C68 133 51 109 51 81 V49 Z"
+                      fill="none"
+                      stroke="rgba(255,255,255,0.20)"
+                      stroke-width="2.5"
+                      stroke-linejoin="round"
+                    />
+
+                    <path
+                      class="perma-z-fill"
+                      d="M64 56 H117 L84 86 H121 L115 102 H61 L95 72 H67 Z"
+                      fill="url(#permaZFillClean)"
+                      opacity="1"
+                    />
+
+                    <path
+                      class="perma-z-stroke"
+                      d="M64 56 H117 L84 86 H121 L115 102 H61 L95 72 H67 Z"
+                      fill="none"
+                      stroke="url(#permaZStrokeClean)"
+                      stroke-width="3.2"
+                      stroke-linejoin="round"
+                    />
+
+                    <path
+                      class="perma-z-highlight"
+                      d="M74 61 H106"
+                      fill="none"
+                      stroke="rgba(255,255,255,0.32)"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <div class="plan-card__copy plan-card__copy--featured">
+                <h3 class="plan-card__name plan-name">Plan Permanente + Activación<br />Denuvo</h3>
+                <p class="plan-card__price plan-price"><span class="plan-card__amount">399</span> Bs</p>
+                <p class="plan-card__price plan-card__price--alt plan-usdt">
+                  <span class="plan-card__amount">55</span> USDT
+                </p>
+                <p class="plan-card__price-line" hidden>
+                  <span class="plan-card__line-bs">399</span> Bs / <span class="plan-card__line-usdt">55</span> USDT
+                </p>
+                <p class="plan-card__desc plan-description">
+                  Acceso permanente a ZetaCore con activación Denuvo incluida.
+                </p>
+              </div>
+              <button type="button" class="btn plan-card__change js-cambiar-plan" hidden>
+                <span class="plan-card__change-arrow" aria-hidden="true">
+                  <svg
+                    class="zc-neon-arrow zc-neon-arrow--left zc-neon-arrow--plan"
+                    viewBox="0 0 24 24"
+                    width="17"
+                    height="17"
+                    focusable="false"
+                  >
+                    <path
+                      d="M13.55 12H20.65"
+                      fill="none"
+                      stroke="url(#zcNeonNavStroke)"
+                      stroke-width="2.1"
+                      stroke-linecap="round"
+                    />
+                    <path
+                      d="M8.45 12L3.8 8.05M8.45 12L3.8 15.95"
+                      fill="none"
+                      stroke="url(#zcNeonNavStroke)"
+                      stroke-width="2.1"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <circle cx="10.85" cy="12" r="2.2" fill="url(#zcNeonNavStroke)" />
+                  </svg>
+                </span>
+                Cambiar plan
+              </button>
+            </div>
+            <button type="button" class="zeta-plan-btn plan-card__btn plan-button">
+              <span class="zeta-plan-btn__face">
+                <span class="zeta-plan-btn__content">
+                  <span class="zeta-plan-btn__text">Elegir plan</span>
+                </span>
+                <span class="zeta-plan-btn__arrow" aria-hidden="true">
+                  <svg viewBox="0 0 56 56" width="34" height="34" aria-hidden="true" focusable="false">
+                    <path
+                      d="M15 14l11.5 14L15 42M31 14l11.5 14L31 42"
+                      fill="none"
+                      stroke="url(#zcNeonNavStroke)"
+                      stroke-width="3.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </span>
+              </span>
+            </button>
+          </article>
+          <article class="plan-card" data-plan="denuvo">
+            <span class="plan-corner tl" aria-hidden="true"></span>
+            <span class="plan-corner tr" aria-hidden="true"></span>
+            <span class="plan-corner bl" aria-hidden="true"></span>
+            <span class="plan-corner br" aria-hidden="true"></span>
+            <div class="plan-card__top">
+              <div
+                class="plan-card__icon plan-icon-wrap plan-card__icon--hex plan-card__icon--denuvo"
+                aria-hidden="true"
+              >
+                <svg
+                  class="plan-icon-svg plan-card__icon-art"
+                  viewBox="0 0 100 100"
+                  width="76"
+                  height="76"
+                  preserveAspectRatio="xMidYMid meet"
+                  focusable="false"
+                  role="presentation"
+                >
+                  <path d="M50 12 L78 24 V48 C78 66 66 80 50 88 C34 80 22 66 22 48 V24 Z" />
+                  <path d="M34 52 L45 63 L68 38" />
+                </svg>
+              </div>
+              <div class="plan-card__copy">
+                <h3 class="plan-card__name plan-name">Activación Denuvo</h3>
+                <p class="plan-card__price plan-price"><span class="plan-card__amount">99</span> Bs</p>
+                <p class="plan-card__price plan-card__price--alt plan-usdt">
+                  <span class="plan-card__amount">14</span> USDT
+                </p>
+                <p class="plan-card__price-line" hidden>
+                  <span class="plan-card__line-bs">99</span> Bs / <span class="plan-card__line-usdt">14</span> USDT
+                </p>
+                <p class="plan-card__desc plan-description">
+                  Activación adicional para juegos con protección Denuvo.
+                </p>
+              </div>
+              <button type="button" class="btn plan-card__change js-cambiar-plan" hidden>
+                <span class="plan-card__change-arrow" aria-hidden="true">
+                  <svg
+                    class="zc-neon-arrow zc-neon-arrow--left zc-neon-arrow--plan"
+                    viewBox="0 0 24 24"
+                    width="17"
+                    height="17"
+                    focusable="false"
+                  >
+                    <path
+                      d="M13.55 12H20.65"
+                      fill="none"
+                      stroke="url(#zcNeonNavStroke)"
+                      stroke-width="2.1"
+                      stroke-linecap="round"
+                    />
+                    <path
+                      d="M8.45 12L3.8 8.05M8.45 12L3.8 15.95"
+                      fill="none"
+                      stroke="url(#zcNeonNavStroke)"
+                      stroke-width="2.1"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <circle cx="10.85" cy="12" r="2.2" fill="url(#zcNeonNavStroke)" />
+                  </svg>
+                </span>
+                Cambiar plan
+              </button>
+            </div>
+            <button type="button" class="zeta-plan-btn plan-card__btn plan-button">
+              <span class="zeta-plan-btn__face">
+                <span class="zeta-plan-btn__content">
+                  <span class="zeta-plan-btn__text">Elegir plan</span>
+                </span>
+                <span class="zeta-plan-btn__arrow" aria-hidden="true">
+                  <svg viewBox="0 0 56 56" width="34" height="34" aria-hidden="true" focusable="false">
+                    <path
+                      d="M15 14l11.5 14L15 42M31 14l11.5 14L31 42"
+                      fill="none"
+                      stroke="url(#zcNeonNavStroke)"
+                      stroke-width="3.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </span>
+              </span>
+            </button>
+          </article>
+        </div>
+      </section>
+
+      <div class="flow-panel flow-panel--hidden" id="flowPanel" aria-live="polite">
+        <div class="flow-panel__toolbar">
+          <button type="button" class="flow-panel__back js-flow-back" aria-label="Volver al paso anterior">
+            <svg
+              class="zc-neon-arrow zc-neon-arrow--back"
+              viewBox="0 0 56 56"
+              width="28"
+              height="28"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <g transform="scale(-1,1) translate(-56,0)">
+                <path
+                  d="M15 14l11.5 14L15 42M31 14l11.5 14L31 42"
+                  fill="none"
+                  stroke="url(#zcNeonNavStroke)"
+                  stroke-width="3.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </g>
+            </svg>
+          </button>
+        </div>
+        <section class="flow-panel__section flow-panel__section--methods" id="metodoSection">
+          <header class="flow-hero">
+            <p class="flow-step-label flow-step-label--ref">Paso 2: Método de pago</p>
+            <div class="flow-hero__deco" aria-hidden="true">
+              <span class="flow-hero__line"></span>
+              <span class="flow-hero__line"></span>
+            </div>
+            <h2 class="flow-hero__title">Elige tu método de pago</h2>
+            <p class="flow-hero__sub">
+              Selecciona el método que prefieras para completar tu pago de forma segura.
+            </p>
+          </header>
+
+          <div class="flow-plan-strip" id="flowPlanStrip" hidden>
+            <div class="flow-plan-strip__inner sci-frame sci-frame--flow-plan">
+              <div class="flow-plan-strip__row">
+                <div id="flowPlanIconMount" class="flow-plan-strip__icon-mount selected-plan-icon" aria-hidden="true">
+                  <div class="selected-plan-icon-hex" id="flowPlanIconHex"></div>
+                </div>
+                <div class="flow-plan-strip__body">
+                  <div class="flow-plan-strip__meta-top">
+                    <p class="flow-plan-strip__eyebrow">Tu plan</p>
+                    <span
+                      class="flow-plan-strip__popular plan-card__badge popular-badge"
+                      id="flowPlanPopularBadge"
+                      hidden
+                      ><span>POPULAR</span></span
+                    >
+                  </div>
+                  <h3 class="flow-plan-strip__name" id="flowPlanName"></h3>
+                  <p class="flow-plan-strip__price" id="flowPlanPrice"></p>
+                  <p class="flow-plan-strip__desc" id="flowPlanDesc"></p>
+                </div>
+                <div class="flow-plan-strip__actions">
+                  <button
+                    type="button"
+                    class="change-action-btn change-action-btn--method js-cambiar-metodo is-hidden-until-method"
+                    id="flowCambiarMetodoBtn"
+                    hidden
+                  >
+                    <span class="change-action-btn__decor-top" aria-hidden="true"></span>
+                    <span class="change-action-btn__decor-bottom" aria-hidden="true"></span>
+                    <span class="change-action-btn__content">
+                      <span class="change-action-btn__icon" aria-hidden="true">
+                        <svg viewBox="0 0 44 44" width="44" height="44" aria-hidden="true" focusable="false">
+                          <path
+                            d="M6.5 16.5h8.5M4 22h12.5M6.5 27.5h8.5"
+                            fill="none"
+                            stroke="url(#zcNeonNavStroke)"
+                            stroke-width="2.35"
+                            stroke-linecap="round"
+                          />
+                          <path
+                            d="M20.5 14L31.5 22 20.5 30"
+                            fill="none"
+                            stroke="url(#zcNeonNavStroke)"
+                            stroke-width="2.65"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                        </svg>
+                      </span>
+                      <span class="change-action-btn__text">Cambiar método de pago</span>
+                    </span>
+                  </button>
+                  <button type="button" class="change-action-btn change-action-btn--plan js-cambiar-plan">
+                    <span class="change-action-btn__decor-top" aria-hidden="true"></span>
+                    <span class="change-action-btn__decor-bottom" aria-hidden="true"></span>
+                    <span class="change-action-btn__content">
+                      <span class="change-action-btn__icon" aria-hidden="true">
+                        <svg viewBox="0 0 44 44" width="44" height="44" aria-hidden="true" focusable="false">
+                          <path
+                            d="M6.5 16.5h8.5M4 22h12.5M6.5 27.5h8.5"
+                            fill="none"
+                            stroke="url(#zcNeonNavStroke)"
+                            stroke-width="2.35"
+                            stroke-linecap="round"
+                          />
+                          <path
+                            d="M20.5 14L31.5 22 20.5 30"
+                            fill="none"
+                            stroke="url(#zcNeonNavStroke)"
+                            stroke-width="2.65"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                        </svg>
+                      </span>
+                      <span class="change-action-btn__text">Cambiar plan</span>
+                    </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="payment-methods-section" id="paymentMethodsSection">
+            <h2 class="payment-methods-title">MÉTODOS DE PAGO</h2>
+            <div class="payment-methods-grid">
+              <button type="button" class="payment-method-card method-btn" data-method="bolivia">
+                <span class="payment-method-badge" aria-hidden="true">
+                  <svg class="payment-method-badge__star" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+                    <path fill="currentColor" d="M12 2l2.4 7.4h7.6l-6 4.6 2.3 7-6.3-4.6-6.3 4.6 2.3-7-6-4.6h7.6z" />
+                  </svg>
+                  RECOMENDADO
+                </span>
+                <div class="payment-method-icon-wrap">
+                  <div class="payment-method-icon-hex qr" aria-hidden="true">
+                    <svg class="payment-qr-icon" viewBox="0 0 80 80" aria-hidden="true" focusable="false" role="presentation">
+                      <g fill="none" stroke="#f3eaff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 26v-8h8" />
+                        <path d="M52 18h8v8" />
+                        <path d="M20 48v8h8" />
+                        <path d="M60 48v8h-8" />
+                      </g>
+                      <g fill="#ead6ff">
+                        <rect x="29" y="26" width="6" height="6" rx="1.3" ry="1.3" />
+                        <rect x="37" y="26" width="6" height="6" rx="1.3" ry="1.3" />
+                        <rect x="45" y="26" width="6" height="6" rx="1.3" ry="1.3" />
+                        <rect x="29" y="34" width="6" height="6" rx="1.3" ry="1.3" />
+                        <rect x="45" y="34" width="6" height="6" rx="1.3" ry="1.3" />
+                        <rect x="29" y="42" width="6" height="6" rx="1.3" ry="1.3" />
+                        <rect x="37" y="42" width="6" height="6" rx="1.3" ry="1.3" />
+                        <rect x="45" y="42" width="6" height="6" rx="1.3" ry="1.3" />
+                      </g>
+                      <rect x="37" y="34" width="6" height="6" rx="1.3" ry="1.3" fill="#ffffff" />
+                    </svg>
+                  </div>
+                </div>
+                <h3 class="payment-method-name">QR Bolivia</h3>
+                <p class="payment-method-description">Paga de forma local con código QR. Rápido y sin comisiones extra.</p>
+                <span class="payment-method-button">
+                  <span class="payment-method-button__face">
+                    <span class="payment-method-button__content">
+                      <span class="payment-method-button__text">Elegir método</span>
+                    </span>
+                    <span class="payment-method-button__arrow" aria-hidden="true">
+                      <svg
+                        class="zc-neon-arrow zc-neon-arrow--method-cta"
+                        viewBox="0 0 56 56"
+                        width="34"
+                        height="34"
+                        focusable="false"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M15 14l11.5 14L15 42M31 14l11.5 14L31 42"
+                          fill="none"
+                          stroke="url(#zcNeonNavStroke)"
+                          stroke-width="3.8"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                    </span>
+                  </span>
+                </span>
+              </button>
+              <button type="button" class="payment-method-card method-btn" data-method="binance">
+                <div class="payment-method-icon-wrap">
+                  <div class="payment-method-icon-hex binance" aria-hidden="true">
+                    <!-- Marca Binance: path oficial Simple Icons (CC0), viewBox nativo 24×24 -->
+                    <svg class="payment-binance-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" role="presentation">
+                      <path
+                        fill="#F3BA2F"
+                        d="M16.624 13.9202l2.7175 2.7154-7.353 7.353-7.353-7.352 2.7175-2.7164 4.6355 4.6595 4.6356-4.6595zm4.6366-4.6366L24 12l-2.7154 2.7164L18.5682 12l2.6924-2.7164zm-9.272.001l2.7163 2.6914-2.7164 2.7174v-.001L9.2721 12l2.7164-2.7154zm-9.2722-.001L5.4088 12l-2.6914 2.6924L0 12l2.7164-2.7164zM11.9885.0115l7.353 7.329-2.7174 2.7154-4.6356-4.6356-4.6355 4.6595-2.7174-2.7154 7.353-7.353z"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                <h3 class="payment-method-name">Binance USDT</h3>
+                <p class="payment-method-description">Paga de forma rápida y segura con USDT (TRC20).</p>
+                <span class="payment-method-button">
+                  <span class="payment-method-button__face">
+                    <span class="payment-method-button__content">
+                      <span class="payment-method-button__text">Elegir método</span>
+                    </span>
+                    <span class="payment-method-button__arrow" aria-hidden="true">
+                      <svg
+                        class="zc-neon-arrow zc-neon-arrow--method-cta"
+                        viewBox="0 0 56 56"
+                        width="34"
+                        height="34"
+                        focusable="false"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M15 14l11.5 14L15 42M31 14l11.5 14L31 42"
+                          fill="none"
+                          stroke="url(#zcNeonNavStroke)"
+                          stroke-width="3.8"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                    </span>
+                  </span>
+                </span>
+              </button>
+            </div>
+          </div>
+
+          <section class="benefits-bar" aria-label="Beneficios">
+            <div class="benefits-bar__body">
+              <div class="benefits-bar__row">
+                <div class="benefits-bar__item">
+                  <span class="benefits-bar__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg>
+                  </span>
+                  <div class="benefits-bar__text">
+                    <strong>RÁPIDO</strong>
+                    <span>Activación veloz</span>
+                  </div>
+                </div>
+                <span class="benefits-bar__sep" aria-hidden="true">|</span>
+                <div class="benefits-bar__item">
+                  <span class="benefits-bar__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+                  </span>
+                  <div class="benefits-bar__text">
+                    <strong>SEGURO</strong>
+                    <span>Pagos verificados</span>
+                  </div>
+                </div>
+                <span class="benefits-bar__sep" aria-hidden="true">|</span>
+                <div class="benefits-bar__item">
+                  <span class="benefits-bar__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 1c-4.97 0-9 4.03-9 9v7c0 1.66 1.34 3 3 3h3v-8H5v-2c0-3.87 3.13-7 7-7s7 3.13 7 7v2h-4v8h3c1.66 0 3-1.34 3-3v-7c0-4.97-4.03-9-9-9z"/></svg>
+                  </span>
+                  <div class="benefits-bar__text">
+                    <strong>SOPORTE 24/7</strong>
+                    <span>Siempre contigo</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <section
+          class="flow-panel__section flow-panel__section--qr"
+          id="qrSection"
+          hidden
+          aria-labelledby="qrScanHeading waComprobanteHeading"
+        >
+          <header class="qr-scan-head">
+            <div class="qr-scan-head__accent" aria-hidden="true"></div>
+            <span class="qr-scan-head__icon-mount" id="qrScanHeadIconMount" aria-hidden="true"></span>
+            <h2 class="qr-scan-head__title" id="qrScanHeading">Escanea o descarga el QR</h2>
+          </header>
+          <div class="qr-stage sci-frame sci-frame--qr-stage" id="qrStage">
+            <div class="qr-stage__grid" aria-hidden="true"></div>
+            <div class="qr-stage__ticks" aria-hidden="true">
+              <span class="qr-stage__tick qr-stage__tick--tl"></span>
+              <span class="qr-stage__tick qr-stage__tick--tr"></span>
+              <span class="qr-stage__tick qr-stage__tick--bl"></span>
+              <span class="qr-stage__tick qr-stage__tick--br"></span>
+            </div>
+            <div class="sci-frame__glow sci-frame__glow--tl" aria-hidden="true"></div>
+            <div class="sci-frame__glow sci-frame__glow--br" aria-hidden="true"></div>
+            <span class="qr-stage__scan" aria-hidden="true"></span>
+            <div class="qr-wrap" id="qrWrap">
+              <img class="qr-img" id="qrImage" alt="Código QR de pago" hidden />
+              <p class="qr-placeholder" id="qrPlaceholder">
+                Elige un plan y un método para ver el QR.
+              </p>
+            </div>
+          </div>
+          <div class="qr-actions">
+            <button type="button" class="btn btn--qr-download" id="btnDescargarQr" disabled>
+              Descargar QR
+            </button>
+          </div>
+
+          <div
+            class="comprobante-card"
+            role="region"
+            aria-labelledby="comprobanteCardTitle"
+          >
+            <div class="comprobante-card__header">
+              <div class="comprobante-card__hex" aria-hidden="true">
+                <svg class="comprobante-card__hex-bg" viewBox="0 0 100 100" width="52" height="52">
+                  <defs>
+                    <linearGradient id="comprobanteHexFill" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stop-color="rgba(88, 28, 135, 0.55)" />
+                      <stop offset="100%" stop-color="rgba(12, 6, 24, 0.95)" />
+                    </linearGradient>
+                  </defs>
+                  <path
+                    d="M50 6 L86 28 V72 L50 94 L14 72 V28 Z"
+                    fill="url(#comprobanteHexFill)"
+                    stroke="rgba(168, 85, 247, 0.85)"
+                    stroke-width="2.5"
+                  />
+                </svg>
+                <span class="comprobante-card__hex-inner">
+                  <svg class="comprobante-card__hex-doc" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+                    <defs>
+                      <linearGradient id="comprobanteDocGrad" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#c4b5fd" />
+                        <stop offset="100%" stop-color="#7c3aed" />
+                      </linearGradient>
+                    </defs>
+                    <path
+                      fill="url(#comprobanteDocGrad)"
+                      d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"
+                    />
+                    <path
+                      fill="rgba(15,8,28,0.35)"
+                      d="M14 2v6h6"
+                    />
+                    <path
+                      stroke="rgba(250,245,255,0.5)"
+                      stroke-width="1"
+                      fill="none"
+                      d="M14 2v6h6"
+                    />
+                  </svg>
+                  <span class="comprobante-card__hex-badge" aria-hidden="true">
+                    <svg
+                      class="zc-neon-arrow zc-neon-arrow--up-badge"
+                      viewBox="0 0 24 24"
+                      width="16"
+                      height="16"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
+                      <path
+                        d="M12 18.5v-7.25M7.15 11.25L12 5.35l4.85 5.9"
+                        fill="none"
+                        stroke="url(#zcNeonUpBadgeStroke)"
+                        stroke-width="2.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </span>
+                </span>
+              </div>
+              <div class="comprobante-card__head-text">
+                <h3 class="comprobante-card__title" id="comprobanteCardTitle">
+                  Comprobante de pago
+                </h3>
+                <p class="comprobante-card__subtitle">
+                  Sube tu captura. Al darle al boton &quot;Enviar Comprobante por WhatsApp&quot;, se enviara la foto cargada. Solo pega el mensaje que se copio automaticamente y mandalo
+                </p>
+              </div>
+            </div>
+
+            <div class="comprobante-card__zone" id="comprobanteDropZone">
+              <div class="comprobante-card__zone-left">
+                <svg
+                  class="comprobante-card__cloud"
+                  viewBox="0 0 24 24"
+                  width="28"
+                  height="28"
+                  aria-hidden="true"
+                >
+                  <defs>
+                    <linearGradient id="comprobanteCloudStroke" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stop-color="#c4b5fd" />
+                      <stop offset="100%" stop-color="#7c3aed" />
+                    </linearGradient>
+                  </defs>
+                  <path
+                    fill="none"
+                    stroke="url(#comprobanteCloudStroke)"
+                    stroke-width="1.65"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M7 18h11a3 3 0 0 0 0-6h-.5A4.5 4.5 0 0 0 7 9.5 3.4 3.4 0 0 0 3.7 15.6 2.5 2.5 0 0 0 7 18z"
+                  />
+                  <path
+                    fill="none"
+                    stroke="url(#comprobanteCloudStroke)"
+                    stroke-width="1.65"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M12 12v6M9.5 14.5L12 12l2.5 2.5"
+                  />
+                </svg>
+                <div class="comprobante-card__zone-copy">
+                  <span class="comprobante-card__zone-primary" id="comprobanteDropPrimary">Seleccionar imagen</span>
+                  <span class="comprobante-card__zone-secondary" id="comprobanteDropSecondary"
+                    >PNG o JPG · máx. 10&nbsp;MB.</span>
+                </div>
+              </div>
+              <button type="button" class="comprobante-card__btn-pick" id="btnComprobanteElegir">
+                Elegir foto
+              </button>
+              <input
+                type="file"
+                id="comprobanteInput"
+                class="comprobante-card__file"
+                accept="image/png,image/jpeg,.png,.jpg,.jpeg"
+                tabindex="-1"
+                aria-label="Seleccionar foto del comprobante (PNG o JPG)"
+              />
+            </div>
+
+            <div class="comprobante-card__trust">
+              <svg
+                class="comprobante-card__shield"
+                viewBox="0 0 24 24"
+                width="18"
+                height="18"
+                aria-hidden="true"
+              >
+                <path
+                  fill="none"
+                  stroke="#a78bfa"
+                  stroke-width="1.5"
+                  stroke-linejoin="round"
+                  d="M12 3l8 3v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-3z"
+                />
+                <path
+                  fill="none"
+                  stroke="#a78bfa"
+                  stroke-width="1.65"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M9 12l2 2 4-4"
+                />
+              </svg>
+              <p class="comprobante-card__trust-text">
+                Tu información está protegida y solo será utilizada para validar tu pago.
+              </p>
+            </div>
+          </div>
+
+          <header class="wa-comprobante-head" aria-labelledby="waComprobanteHeading">
+            <div class="wa-comprobante-head__accent" aria-hidden="true"></div>
+            <span class="wa-comprobante-head__icon-mount" aria-hidden="true">
+              <svg
+                class="wa-comprobante-head__wa-logo"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                width="28"
+                height="28"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path
+                  fill="currentColor"
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"
+                />
+              </svg>
+            </span>
+            <h2 class="wa-comprobante-head__title" id="waComprobanteHeading">Envía tu comprobante</h2>
+          </header>
+          <div class="wa-actions">
+            <button type="button" class="btn btn--whatsapp btn--whatsapp--comprobante btn--block-mobile" id="btnWhatsapp" disabled>
+              <svg
+                class="btn--whatsapp__glyph"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path
+                  fill="currentColor"
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"
+                />
+              </svg>
+              <span class="btn--whatsapp__label">Enviar comprobante por WhatsApp</span>
+            </button>
+          </div>
+          <p class="wa-hint" id="waHint" hidden></p>
+        </section>
+      </div>
+
+      <section class="section faq faq-section" id="faq">
+        <h2 class="section__title section__title--sci faq-title">Preguntas frecuentes</h2>
+        <div class="faq__list faq-list">
+          <details class="faq__item faq-item">
+            <summary>
+              <div class="faq-left">
+                <div class="faq-icon-hex" aria-hidden="true">
+                  <svg class="hex-bg" viewBox="0 0 100 100" width="42" height="42" aria-hidden="true">
+                    <defs>
+                      <linearGradient id="faqHexFill1" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="rgba(123,55,230,0.45)" />
+                        <stop offset="100%" stop-color="rgba(18,8,40,0.92)" />
+                      </linearGradient>
+                    </defs>
+                    <path
+                      d="M50 6 L86 28 V72 L50 94 L14 72 V28 Z"
+                      fill="url(#faqHexFill1)"
+                      stroke="#9f5dff"
+                      stroke-width="3"
+                    />
+                  </svg>
+                  <svg class="main-icon" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+                    <path d="M12 3v10" />
+                    <path d="M8 9l4 4 4-4" />
+                    <path d="M5 17v2h14v-2" />
+                  </svg>
+                </div>
+              </div>
+              <span class="faq-question">¿Cómo se instala ZetaCore?</span>
+              <div class="faq-right">
+                <div class="faq-plus" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 5v14" />
+                    <path d="M5 12h14" />
+                  </svg>
+                </div>
+              </div>
+            </summary>
+            <p>Solo copias y pegas un código, colocas tu licencia y listo.</p>
+          </details>
+          <details class="faq__item faq-item">
+            <summary>
+              <div class="faq-left">
+                <div class="faq-icon-hex" aria-hidden="true">
+                  <svg class="hex-bg" viewBox="0 0 100 100" width="42" height="42" aria-hidden="true">
+                    <defs>
+                      <linearGradient id="faqHexFill2" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="rgba(123,55,230,0.45)" />
+                        <stop offset="100%" stop-color="rgba(18,8,40,0.92)" />
+                      </linearGradient>
+                    </defs>
+                    <path
+                      d="M50 6 L86 28 V72 L50 94 L14 72 V28 Z"
+                      fill="url(#faqHexFill2)"
+                      stroke="#9f5dff"
+                      stroke-width="3"
+                    />
+                  </svg>
+                  <svg class="main-icon" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+                    <path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3z" />
+                    <path d="M9 12l2 2 4-4" />
+                  </svg>
+                </div>
+              </div>
+              <span class="faq-question">¿Es seguro ZetaCore?</span>
+              <div class="faq-right">
+                <div class="faq-plus" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 5v14" />
+                    <path d="M5 12h14" />
+                  </svg>
+                </div>
+              </div>
+            </summary>
+            <p>Sí, es totalmente seguro. No contiene virus ni software malicioso.</p>
+          </details>
+          <details class="faq__item faq-item">
+            <summary>
+              <div class="faq-left">
+                <div class="faq-icon-hex" aria-hidden="true">
+                  <svg class="hex-bg" viewBox="0 0 100 100" width="42" height="42" aria-hidden="true">
+                    <defs>
+                      <linearGradient id="faqHexFill3" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="rgba(123,55,230,0.45)" />
+                        <stop offset="100%" stop-color="rgba(18,8,40,0.92)" />
+                      </linearGradient>
+                    </defs>
+                    <path
+                      d="M50 6 L86 28 V72 L50 94 L14 72 V28 Z"
+                      fill="url(#faqHexFill3)"
+                      stroke="#9f5dff"
+                      stroke-width="3"
+                    />
+                  </svg>
+                  <svg class="main-icon" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+                    <path d="M7 9h10a3 3 0 0 1 3 3v2a3 3 0 0 1-3 3l-3-2H10l-3 2a3 3 0 0 1-3-3v-2a3 3 0 0 1 3-3z" />
+                    <path d="M8 13h3" />
+                    <path d="M9.5 11.5v3" />
+                    <circle cx="16.5" cy="12.5" r="0.8" fill="#d8b3ff" stroke="none" />
+                    <circle cx="18.5" cy="14.5" r="0.8" fill="#d8b3ff" stroke="none" />
+                  </svg>
+                </div>
+              </div>
+              <span class="faq-question">¿Qué juegos puedo adquirir?</span>
+              <div class="faq-right">
+                <div class="faq-plus" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 5v14" />
+                    <path d="M5 12h14" />
+                  </svg>
+                </div>
+              </div>
+            </summary>
+            <p>Puedes adquirir prácticamente cualquier juego de Steam.</p>
+          </details>
+          <details class="faq__item faq-item">
+            <summary>
+              <div class="faq-left">
+                <div class="faq-icon-hex" aria-hidden="true">
+                  <svg class="hex-bg" viewBox="0 0 100 100" width="42" height="42" aria-hidden="true">
+                    <defs>
+                      <linearGradient id="faqHexFill4" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="rgba(123,55,230,0.45)" />
+                        <stop offset="100%" stop-color="rgba(18,8,40,0.92)" />
+                      </linearGradient>
+                    </defs>
+                    <path
+                      d="M50 6 L86 28 V72 L50 94 L14 72 V28 Z"
+                      fill="url(#faqHexFill4)"
+                      stroke="#9f5dff"
+                      stroke-width="3"
+                    />
+                  </svg>
+                  <svg class="main-icon" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+                    <rect x="6" y="10" width="12" height="9" rx="2" />
+                    <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+                  </svg>
+                </div>
+              </div>
+              <span class="faq-question">¿Se pueden jugar juegos con protección Denuvo?</span>
+              <div class="faq-right">
+                <div class="faq-plus" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 5v14" />
+                    <path d="M5 12h14" />
+                  </svg>
+                </div>
+              </div>
+            </summary>
+            <p>
+              Sí, con el plan permanente o adquiriendo la activación Denuvo junto al plan mensual.
+            </p>
+          </details>
+          <details class="faq__item faq-item">
+            <summary>
+              <div class="faq-left">
+                <div class="faq-icon-hex" aria-hidden="true">
+                  <svg class="hex-bg" viewBox="0 0 100 100" width="42" height="42" aria-hidden="true">
+                    <defs>
+                      <linearGradient id="faqHexFill5" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="rgba(123,55,230,0.45)" />
+                        <stop offset="100%" stop-color="rgba(18,8,40,0.92)" />
+                      </linearGradient>
+                    </defs>
+                    <path
+                      d="M50 6 L86 28 V72 L50 94 L14 72 V28 Z"
+                      fill="url(#faqHexFill5)"
+                      stroke="#9f5dff"
+                      stroke-width="3"
+                    />
+                  </svg>
+                  <svg class="main-icon" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+                    <circle cx="12" cy="12" r="8" />
+                    <path d="M4 12h16" />
+                    <path d="M12 4a12 12 0 0 1 0 16" />
+                    <path d="M12 4a12 12 0 0 0 0 16" />
+                  </svg>
+                </div>
+              </div>
+              <span class="faq-question">¿Se puede jugar online?</span>
+              <div class="faq-right">
+                <div class="faq-plus" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 5v14" />
+                    <path d="M5 12h14" />
+                  </svg>
+                </div>
+              </div>
+            </summary>
+            <p>Sí, muchos juegos permiten jugar online.</p>
+          </details>
+          <details class="faq__item faq-item">
+            <summary>
+              <div class="faq-left">
+                <div class="faq-icon-hex" aria-hidden="true">
+                  <svg class="hex-bg" viewBox="0 0 100 100" width="42" height="42" aria-hidden="true">
+                    <defs>
+                      <linearGradient id="faqHexFill6" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="rgba(123,55,230,0.45)" />
+                        <stop offset="100%" stop-color="rgba(18,8,40,0.92)" />
+                      </linearGradient>
+                    </defs>
+                    <path
+                      d="M50 6 L86 28 V72 L50 94 L14 72 V28 Z"
+                      fill="url(#faqHexFill6)"
+                      stroke="#9f5dff"
+                      stroke-width="3"
+                    />
+                  </svg>
+                  <svg class="main-icon" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+                    <path d="M9 4h6a2 2 0 0 1 2 2v2h2a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2v2a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2v-2H5a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h2V6a2 2 0 0 1 2-2z" />
+                    <path d="M12 9v6" />
+                    <path d="M9 12h6" />
+                  </svg>
+                </div>
+              </div>
+              <span class="faq-question">¿Incluye DLCs?</span>
+              <div class="faq-right">
+                <div class="faq-plus" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 5v14" />
+                    <path d="M5 12h14" />
+                  </svg>
+                </div>
+              </div>
+            </summary>
+            <p>Sí, incluye todos los DLCs y se van actualizando constantemente.</p>
+          </details>
+          <details class="faq__item faq-item">
+            <summary>
+              <div class="faq-left">
+                <div class="faq-icon-hex" aria-hidden="true">
+                  <svg class="hex-bg" viewBox="0 0 100 100" width="42" height="42" aria-hidden="true">
+                    <defs>
+                      <linearGradient id="faqHexFill7" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="rgba(123,55,230,0.45)" />
+                        <stop offset="100%" stop-color="rgba(18,8,40,0.92)" />
+                      </linearGradient>
+                    </defs>
+                    <path
+                      d="M50 6 L86 28 V72 L50 94 L14 72 V28 Z"
+                      fill="url(#faqHexFill7)"
+                      stroke="#9f5dff"
+                      stroke-width="3"
+                    />
+                  </svg>
+                  <svg class="main-icon" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+                    <path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3z" />
+                    <path d="M12 8v5" />
+                    <circle cx="12" cy="16.5" r="0.8" fill="#d8b3ff" stroke="none" />
+                  </svg>
+                </div>
+              </div>
+              <span class="faq-question">¿Este método es baneable?</span>
+              <div class="faq-right">
+                <div class="faq-plus" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 5v14" />
+                    <path d="M5 12h14" />
+                  </svg>
+                </div>
+              </div>
+            </summary>
+            <p>No, es un método seguro y no es baneable.</p>
+          </details>
+        </div>
+      </section>
+
+      <section class="section social">
+        <h2 class="section__title section__title--sci">Síguenos o consulta más información</h2>
+        <div class="social__btns">
+          <a
+            class="btn btn--social btn--wa"
+            href="https://wa.me/59176045341"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+              />
+            </svg>
+            WhatsApp
+          </a>
+          <a
+            class="btn btn--social btn--fb"
+            href="https://www.facebook.com/share/1CTnQePJ2D/?mibextid=wwXIfr"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+              <path
+                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
+              />
+            </svg>
+            Facebook
+          </a>
+          <a
+            class="btn btn--social btn--ig"
+            href="https://www.instagram.com/zetacore_official?igsh=MXIxOGl5bnVtbnp4cw%3D%3D&utm_source=qr"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg class="social-icon social-icon--ig" viewBox="0 0 24 24" aria-hidden="true">
+              <defs>
+                <linearGradient id="igGradZc" x1="0%" y1="100%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#833ab4" />
+                  <stop offset="45%" stop-color="#fd1d1d" />
+                  <stop offset="100%" stop-color="#fcb045" />
+                </linearGradient>
+              </defs>
+              <path
+                fill="url(#igGradZc)"
+                d="M12 2.2c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.86s-.01 3.59-.07 4.86c-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.65-.07-4.86s.01-3.59.07-4.86c.15-3.23 1.67-4.77 4.92-4.92 1.27-.06 1.65-.07 4.85-.07zM12 7a5 5 0 100 10 5 5 0 000-10zm6.4-4.9a1.4 1.4 0 11-.001 2.801 1.4 1.4 0 01.001-2.801zM12 9.8a2.2 2.2 0 110 4.4 2.2 2.2 0 010-4.4z"
+              />
+            </svg>
+            Instagram
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>ZetaCore · Página Oficial</p>
+    </footer>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="script.js?v=41"></script>
+  </body>
+</html>

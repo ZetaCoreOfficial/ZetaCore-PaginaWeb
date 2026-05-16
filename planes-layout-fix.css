@@ -1,0 +1,122 @@
+/**
+ * Refuerzo de layout: grilla de 3 planes siempre en flujo normal (Paso 1).
+ * Cargar después de planes-spec.css y perma-hero.css.
+ */
+
+.section--planes.plans-section {
+  position: relative !important;
+  z-index: 1 !important;
+  overflow: visible !important;
+}
+
+/* Pasos 2–4: pantalla de checkout sin grilla de 3 planes */
+#planes.plans-section--hidden-in-checkout {
+  display: none !important;
+}
+
+.section--planes.plans-section #planCards.plans.plans-grid:not(.plans--checkout) {
+  position: relative !important;
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 28px !important;
+  align-items: stretch !important;
+  justify-content: center !important;
+  width: 100% !important;
+  max-width: 1580px !important;
+  margin: 0 auto !important;
+}
+
+@media (max-width: 1200px) {
+  .section--planes.plans-section #planCards.plans.plans-grid:not(.plans--checkout) {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+.section--planes.plans-section #planCards.plans-grid:not(.plans--checkout) > .plan-card {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  transform: none !important;
+  z-index: 1 !important;
+  width: 100% !important;
+  min-width: 0 !important;
+}
+
+.section--planes.plans-section #planCards.plans-grid:not(.plans--checkout) > .plan-card.featured,
+.section--planes.plans-section #planCards.plans-grid:not(.plans--checkout) > .plan-card.featured.perma-hero-card {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  transform: scale(1.03) !important;
+  z-index: 2 !important;
+  width: 100% !important;
+  min-width: 0 !important;
+}
+
+.section--planes.plans-section
+  #planCards.plans-grid:not(.plans--checkout)
+  > .plan-card.featured.perma-hero-card
+  .plan-icon-wrap,
+.section--planes.plans-section
+  #planCards.plans-grid:not(.plans--checkout)
+  > .plan-card.featured.perma-hero-card
+  .perma-hero-icon {
+  position: relative !important;
+  transform: none !important;
+}
+
+/* Hover: misma especificidad que arriba + :hover para poder combinar translateY con scale */
+@media (min-width: 901px) {
+  .section--planes.plans-section #planCards.plans-grid:not(.plans--checkout) > .plan-card.featured.perma-hero-card:hover:not(.plan-card--hidden) {
+    transform: translateY(-2px) scale(1.03) !important;
+  }
+}
+
+/* Resaltado suave si hay plan guardado al volver del paso 2 */
+.section--planes.plans-section #planCards .plan-card.plan-card--picked {
+  box-shadow:
+    0 0 0 1px rgba(196, 181, 253, 0.45),
+    0 0 32px rgba(124, 58, 237, 0.22) !important;
+}
+
+/* CTA «Elegir plan»: chevron SVG (evita font-size del carácter ›) */
+.section--planes.plans-section .plan-button .plan-card__btn-chevron.arrow {
+  font-size: 0 !important;
+  line-height: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 24px !important;
+  height: 24px !important;
+}
+
+/* Móvil: Plan mensual / Denuvo — sin min-height 520px (evita hueco gigante); reserva inferior alineada al ritmo del Plan permanente */
+@media (max-width: 768px) {
+  .section--planes.plans-section #planCards.plans.plans-grid:not(.plans--checkout) > .plan-card:not(.featured),
+  .section--planes.plans-section
+    #planCards.plans.plans-grid.plans--checkout
+    > article.plan-card.plan-card--checkout-focus:not(.plan-card--hidden):not(.featured) {
+    min-height: auto !important;
+    padding-bottom: 96px !important;
+  }
+
+  .section--planes.plans-section #planCards.plans.plans-grid:not(.plans--checkout) > .plan-card:not(.featured) .plan-name,
+  .section--planes.plans-section
+    #planCards.plans.plans-grid.plans--checkout
+    > article.plan-card.plan-card--checkout-focus:not(.plan-card--hidden):not(.featured)
+    .plan-name {
+    margin-bottom: 12px !important;
+  }
+
+  .section--planes.plans-section #planCards.plans.plans-grid:not(.plans--checkout) > .plan-card:not(.featured) .plan-description,
+  .section--planes.plans-section
+    #planCards.plans.plans-grid.plans--checkout
+    > article.plan-card.plan-card--checkout-focus:not(.plan-card--hidden):not(.featured)
+    .plan-description {
+    margin-top: 12px !important;
+  }
+}
