@@ -158,6 +158,41 @@ img {
   backface-visibility: hidden;
 }
 
+/* Móvil/táctil: el PNG es cuadrado (esquinas negras); filter en el wrap dibuja caja en iOS */
+@media (hover: none) and (pointer: coarse) {
+  .header__brand {
+    isolation: auto;
+  }
+
+  .header__logo-wrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: clamp(56px, 16vw, 88px);
+    height: clamp(56px, 16vw, 88px);
+    border-radius: 50%;
+    overflow: hidden;
+    filter: none;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .header__brand:hover .header__logo-wrap {
+    transform: none;
+    filter: none;
+  }
+
+  .header__logo {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    object-fit: cover;
+    object-position: center;
+    filter: drop-shadow(0 0 16px rgba(168, 85, 247, 0.52))
+      drop-shadow(0 0 36px rgba(91, 33, 182, 0.3));
+  }
+}
+
 .header__title {
   margin: 0 0 0.45rem;
   font-size: clamp(1.1rem, 4.5vw, 2rem);
