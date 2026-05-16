@@ -8,7 +8,15 @@
   "use strict";
 
   var WA_URL = "https://wa.me/59176045341";
-  var COMPROBANTE_API = "/api/comprobante";
+  var GUARD_API_BASE = "https://zetacoreguard.zplir1501.workers.dev";
+
+  function comprobanteApiUrl() {
+    var host = location.hostname;
+    if (host === "localhost" || host === "127.0.0.1") {
+      return "/api/comprobante";
+    }
+    return GUARD_API_BASE.replace(/\/$/, "") + "/pagos/comprobante";
+  }
 
   var PLANS = {
     mensual: {
@@ -614,7 +622,7 @@
     var seq = ++comprobanteUploadSeq;
     return readFileAsDataUrl(file)
       .then(function (dataUrl) {
-        return fetch(COMPROBANTE_API, {
+        return fetch(comprobanteApiUrl(), {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -647,13 +655,8 @@
       })
       .catch(function (err) {
         if (seq !== comprobanteUploadSeq) return;
-        var local =
-          location.hostname === "localhost" ||
-          location.hostname === "127.0.0.1";
-        if (local) {
-          var detail = err && err.message ? String(err.message) : "error desconocido";
-          showToast("No se pudo enviar a Telegram: " + detail, 7000);
-        }
+        var detail = err && err.message ? String(err.message) : "error desconocido";
+        showToast("No se pudo enviar a Telegram: " + detail, 7000);
       });
   }
 
