@@ -7,12 +7,14 @@
     "start": "npx --yes serve -l tcp://0.0.0.0:3001 .",
     "start:alt": "npx --yes serve -l tcp://0.0.0.0:3001 .",
     "build:logo": "node scripts/build-header-logo.cjs",
+    "optimize:demo-video": "node scripts/optimize-demo-video.cjs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
     "sharp": "^0.34.5"
   }
 }

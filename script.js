@@ -774,6 +774,39 @@
     return m + ":" + (s < 10 ? "0" : "") + s;
   }
 
+  /** Duración útil para seek (metadata o rango seekable tras carga por red). */
+  function demoVideoDuration(video) {
+    var d = video.duration;
+    if (d && isFinite(d) && d > 0) return d;
+    try {
+      if (video.seekable && video.seekable.length > 0) {
+        var end = video.seekable.end(video.seekable.length - 1);
+        if (end && isFinite(end) && end > 0) return end;
+      }
+    } catch (eDur) {}
+    return 0;
+  }
+
+  function demoCanSeek(video) {
+    try {
+      return video.seekable && video.seekable.length > 0 && video.seekable.end(0) > video.seekable.start(0);
+    } catch (eSeek) {
+      return false;
+    }
+  }
+
+  function demoSetTime(video, t) {
+    var d = demoVideoDuration(video);
+    if (d > 0) t = Math.min(Math.max(0, t), d);
+    else t = Math.max(0, t);
+    try {
+      video.currentTime = t;
+    } catch (eSet) {}
+    if (video.loop && d > 0 && t >= d - 0.05) {
+      video.currentTime = Math.max(0, d - 0.05);
+    }
+  }
+
   function initDemoPlayer() {
     var root = document.querySelector("[data-demo-player]");
     var video = $("#heroDemoVideo");
@@ -821,9 +854,9 @@
     }
 
     function updateProgress() {
-      var d = video.duration;
+      var d = demoVideoDuration(video);
       var p = 0;
-      if (d && isFinite(d) && d > 0) {
+      if (d > 0) {
         p = (video.currentTime / d) * 100;
         if (p < 0) p = 0;
         if (p > 100) p = 100;
@@ -835,20 +868,20 @@
         tCombined.textContent =
           formatDemoTime(video.currentTime) +
           " / " +
-          formatDemoTime(isFinite(video.duration) ? video.duration : 0);
+          formatDemoTime(demoVideoDuration(video));
       }
     }
 
     function seekFromClientX(clientX) {
       if (!track) return;
+      var d = demoVideoDuration(video);
+      if (d <= 0 && !demoCanSeek(video)) return;
       var rect = track.getBoundingClientRect();
       if (rect.width <= 0) return;
       var r = Math.min(Math.max(0, (clientX - rect.left) / rect.width), 1);
-      var d = video.duration;
-      if (d && isFinite(d) && d > 0) {
-        video.currentTime = r * d;
-        updateProgress();
-      }
+      if (d > 0) demoSetTime(video, r * d);
+      else if (demoCanSeek(video)) demoSetTime(video, video.seekable.start(0) + r * (video.seekable.end(0) - video.seekable.start(0)));
+      updateProgress();
     }
 
     function onMetaOrDuration() {
@@ -908,7 +941,7 @@
     var bBack = root.querySelector('[data-demo-action="seek-back"]');
     if (bBack) {
       bBack.addEventListener("click", function () {
-        video.currentTime = Math.max(0, video.currentTime - 5);
+        demoSetTime(video, video.currentTime - 5);
         updateProgress();
       });
     }
@@ -916,9 +949,7 @@
     var bFwd = root.querySelector('[data-demo-action="seek-fwd"]');
     if (bFwd) {
       bFwd.addEventListener("click", function () {
-        var d = video.duration;
-        if (d && isFinite(d)) video.currentTime = Math.min(d, video.currentTime + 5);
-        else video.currentTime = video.currentTime + 5;
+        demoSetTime(video, video.currentTime + 5);
         updateProgress();
       });
     }
@@ -1058,21 +1089,22 @@
 
     if (track) {
       track.addEventListener("keydown", function (e) {
-        var d = video.duration;
-        if (!d || !isFinite(d)) return;
+        var d = demoVideoDuration(video);
+        if (d <= 0 && !demoCanSeek(video)) return;
         if (e.key === "ArrowLeft" || e.key === "ArrowDown") {
           e.preventDefault();
-          video.currentTime = Math.max(0, video.currentTime - 5);
+          demoSetTime(video, video.currentTime - 5);
         } else if (e.key === "ArrowRight" || e.key === "ArrowUp") {
           e.preventDefault();
-          video.currentTime = Math.min(d, video.currentTime + 5);
+          demoSetTime(video, video.currentTime + 5);
         } else if (e.key === "Home") {
           e.preventDefault();
-          video.currentTime = 0;
+          demoSetTime(video, 0);
         } else if (e.key === "End") {
           e.preventDefault();
-          video.currentTime = d;
+          demoSetTime(video, d > 0 ? d : video.currentTime);
         }
+        updateProgress();
       });
 
       track.addEventListener("pointerdown", function (e) {
