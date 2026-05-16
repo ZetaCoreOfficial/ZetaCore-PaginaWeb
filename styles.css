@@ -158,41 +158,65 @@ img {
   backface-visibility: hidden;
 }
 
-/* Móvil/táctil: el PNG es cuadrado (esquinas negras); filter en el wrap dibuja caja en iOS */
-@media (hover: none) and (pointer: coarse) {
+/* Móvil: logo circular (PNG dedicado); sin filter en contenedor (evita caja en Safari) */
+@media (max-width: 640px) {
   .header__brand {
     isolation: auto;
   }
 
   .header__logo-wrap {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: clamp(56px, 16vw, 88px);
-    height: clamp(56px, 16vw, 88px);
+    position: relative;
+    display: inline-block;
+    line-height: 0;
+    filter: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0;
+    overflow: visible;
+  }
+
+  .header__logo-wrap picture {
+    display: block;
+    line-height: 0;
+  }
+
+  .header__logo-wrap::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: clamp(64px, 18vw, 96px);
+    height: clamp(64px, 18vw, 96px);
+    transform: translate(-50%, -50%);
     border-radius: 50%;
-    overflow: hidden;
-    filter: none;
-    background: transparent;
-    box-shadow: none;
+    pointer-events: none;
+    z-index: -1;
+    background: radial-gradient(
+      circle,
+      rgba(168, 85, 247, 0.42) 0%,
+      rgba(124, 58, 237, 0.18) 42%,
+      transparent 68%
+    );
   }
 
   .header__brand:hover .header__logo-wrap {
     transform: none;
-    filter: none;
+    filter: none !important;
   }
 
   .header__logo {
-    width: 100%;
-    height: 100%;
-    max-width: none;
-    object-fit: cover;
-    object-position: center;
-    filter: drop-shadow(0 0 16px rgba(168, 85, 247, 0.52))
-      drop-shadow(0 0 36px rgba(91, 33, 182, 0.3));
+    display: block;
+    width: auto;
+    height: clamp(56px, 16vw, 88px);
+    max-width: min(200px, 72vw);
+    object-fit: contain;
+    filter: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    -webkit-tap-highlight-color: transparent;
   }
 }
-
 .header__title {
   margin: 0 0 0.45rem;
   font-size: clamp(1.1rem, 4.5vw, 2rem);
