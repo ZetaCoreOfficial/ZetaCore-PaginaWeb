@@ -767,6 +767,17 @@
     var video = $("#heroDemoVideo");
     if (!root || !video) return;
 
+    var srcEl = video.querySelector("source");
+    if (srcEl) {
+      var host = location.hostname;
+      if (host === "localhost" || host === "127.0.0.1") {
+        srcEl.setAttribute("src", "assets/zetacore-demo.mp4?v=4");
+        try {
+          video.load();
+        } catch (eLoad) {}
+      }
+    }
+
     var btnPlay = root.querySelector('[data-demo-action="toggle-play"]');
     var iconPause = root.querySelector(".demo-dock__icon--pause");
     var iconPlay = root.querySelector(".demo-dock__icon--play");
