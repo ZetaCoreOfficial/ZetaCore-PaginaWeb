@@ -1,6 +1,6 @@
 /**
  * ZetaCore — Métodos de pago (solo local)
- * QR en assets: Mensual_Pago.jpeg, Perma_Pago.jpeg, Denuvo_Pago.jpeg,
+ * QR en assets: Mensual_QR.jpeg, Permanente_QR.jpeg, Denuvo_QR.jpeg,
  *               Mensual_Binance.jpeg, Perma_Binance.jpeg, Denuvo_Binance.jpeg
  */
 
@@ -43,9 +43,9 @@
   };
 
   var QR_FILES = {
-    mensual: { bolivia: "Mensual_Pago.jpeg", binance: "Mensual_Binance.jpeg" },
-    permanente: { bolivia: "Perma_Pago.jpeg", binance: "Perma_Binance.jpeg" },
-    denuvo: { bolivia: "Denuvo_Pago.jpeg", binance: "Denuvo_Binance.jpeg" },
+    mensual: { bolivia: "Mensual_QR.jpeg", binance: "Mensual_Binance.jpeg" },
+    permanente: { bolivia: "Permanente_QR.jpeg", binance: "Perma_Binance.jpeg" },
+    denuvo: { bolivia: "Denuvo_QR.jpeg", binance: "Denuvo_Binance.jpeg" },
   };
 
   var state = {
