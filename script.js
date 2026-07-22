@@ -1,14 +1,14 @@
 /**
  * ZetaCore — Métodos de pago (solo local)
- * QR en assets: Mensual_QR.jpeg, Permanente_QR.jpeg, Denuvo_QR.jpeg,
- *               Mensual_Binance.jpeg, Perma_Binance.jpeg, Denuvo_Binance.jpeg
+ * QR en assets: Mensual_QR.jpeg, Permanente_QR.jpeg, 49Bs.jpeg (Denuvo BO),
+ *               Mensual_Binance.jpeg, Perma_Binance.jpeg, 8 USDT - DENUVO.jpeg
  */
 
 (function () {
   "use strict";
 
   var WA_URL = "https://wa.me/59176045341";
-  var GUARD_API_BASE = "https://zetacoreguard.zplir1501.workers.dev";
+  var GUARD_API_BASE = "https://zetacoreguard.cjosuepadilla123.workers.dev";
 
   function comprobanteApiUrl() {
     var host = location.hostname;
@@ -36,8 +36,8 @@
     denuvo: {
       id: "denuvo",
       label: "Activación Denuvo",
-      bs: "99",
-      usdt: "14",
+      bs: "49",
+      usdt: "8",
       desc: "Activación adicional para juegos con protección Denuvo.",
     },
   };
@@ -45,7 +45,7 @@
   var QR_FILES = {
     mensual: { bolivia: "Mensual_QR.jpeg", binance: "Mensual_Binance.jpeg" },
     permanente: { bolivia: "Permanente_QR.jpeg", binance: "Perma_Binance.jpeg" },
-    denuvo: { bolivia: "Denuvo_QR.jpeg", binance: "Denuvo_Binance.jpeg" },
+    denuvo: { bolivia: "49Bs.jpeg", binance: "8 USDT - DENUVO.jpeg" },
   };
 
   var state = {
@@ -219,8 +219,9 @@
       else descEl.textContent = plan.desc;
     }
     if (badge) {
-      if (planId === "permanente") badge.removeAttribute("hidden");
-      else badge.setAttribute("hidden", "");
+      var showPopular = planId === "permanente";
+      badge.classList.toggle("is-popular-plan", showPopular);
+      badge.hidden = !showPopular;
     }
     strip.removeAttribute("hidden");
     updateFlowCambiarMetodoVisibility();
@@ -787,36 +788,38 @@
     var tCombined = $("#demoTimeCombined");
     var dragging = false;
     var seekbar = root.querySelector(".demo-dock__seekbar");
-    var rafId = 0;
+    var mediaWrap = root.querySelector(".demo-shell__media");
 
-    function stopProgressRaf() {
-      if (rafId) {
-        cancelAnimationFrame(rafId);
-        rafId = 0;
-      }
-    }
-
-    function tickProgress() {
-      updateProgress();
-      if (!video.paused) {
-        rafId = requestAnimationFrame(tickProgress);
-      }
-    }
-
-    function startProgressRaf() {
-      stopProgressRaf();
-      if (!video.paused) {
-        rafId = requestAnimationFrame(tickProgress);
+    function reserveDemoVideoSpace() {
+      if (!mediaWrap) return;
+      var w = video.videoWidth;
+      var h = video.videoHeight;
+      if (w > 0 && h > 0) {
+        mediaWrap.style.aspectRatio = w + " / " + h;
       }
     }
 
     function syncPlayUi() {
-      var paused = video.paused;
+      var paused = video.paused || video.ended;
       if (btnPlay) {
         btnPlay.setAttribute("aria-label", paused ? "Reanudar reproducción" : "Pausar reproducción");
       }
       if (iconPause) iconPause.toggleAttribute("hidden", paused);
       if (iconPlay) iconPlay.toggleAttribute("hidden", !paused);
+    }
+
+    function toggleDemoPlayback() {
+      if (video.paused || video.ended) {
+        delete video.dataset.userPaused;
+        var playPromise = video.play();
+        if (playPromise && typeof playPromise.catch === "function") {
+          playPromise.catch(function () {});
+        }
+      } else {
+        video.dataset.userPaused = "1";
+        video.pause();
+      }
+      syncPlayUi();
     }
 
     function updateProgress() {
@@ -851,11 +854,15 @@
     }
 
     function onMetaOrDuration() {
+      reserveDemoVideoSpace();
       updateProgress();
       syncPlayUi();
       syncVolUi();
-      startProgressRaf();
     }
+
+    reserveDemoVideoSpace();
+    video.addEventListener("loadedmetadata", reserveDemoVideoSpace);
+    video.addEventListener("resize", reserveDemoVideoSpace);
 
     video.addEventListener("timeupdate", updateProgress);
     video.addEventListener("loadedmetadata", onMetaOrDuration);
@@ -865,31 +872,24 @@
     video.addEventListener("seeking", updateProgress);
     video.addEventListener("seeked", updateProgress);
     video.addEventListener("ratechange", updateProgress);
-    video.addEventListener("play", function () {
-      syncPlayUi();
-      startProgressRaf();
-    });
-    video.addEventListener("playing", function () {
-      syncPlayUi();
-      startProgressRaf();
-    });
-    video.addEventListener("pause", function () {
-      syncPlayUi();
-      stopProgressRaf();
-    });
+    video.addEventListener("play", syncPlayUi);
+    video.addEventListener("playing", syncPlayUi);
+    video.addEventListener("pause", syncPlayUi);
     video.addEventListener("ended", function () {
-      stopProgressRaf();
       updateProgress();
       syncPlayUi();
+      if (video.dataset.userPaused === "1") return;
       try {
         video.currentTime = 0;
-        video.play().catch(function () {});
+        var loopPromise = video.play();
+        if (loopPromise && typeof loopPromise.catch === "function") {
+          loopPromise.catch(function () {});
+        }
       } catch (eLoop) {}
     });
 
     syncPlayUi();
     updateProgress();
-    startProgressRaf();
 
     var dockRow = root.querySelector(".demo-shell__dock-row");
     if (dockRow) {
@@ -897,7 +897,12 @@
         var btn = e.target.closest("[data-demo-action]");
         if (!btn || !dockRow.contains(btn)) return;
         var action = btn.getAttribute("data-demo-action");
-        if (action === "toggle-play") return;
+        if (action === "toggle-play") {
+          e.preventDefault();
+          e.stopPropagation();
+          toggleDemoPlayback();
+          return;
+        }
         if (action === "seek-back") {
           e.preventDefault();
           demoSetTime(video, video.currentTime - 5);
@@ -919,12 +924,18 @@
     }
 
     if (btnPlay) {
-      btnPlay.addEventListener("click", function () {
-        if (video.paused) {
-          video.play().catch(function () {});
-        } else {
-          video.pause();
-        }
+      btnPlay.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleDemoPlayback();
+      });
+    }
+
+    if (mediaWrap) {
+      mediaWrap.addEventListener("click", function (e) {
+        if (e.target.closest("button, a, input, label")) return;
+        e.preventDefault();
+        toggleDemoPlayback();
       });
     }
 
@@ -1137,6 +1148,38 @@
     }
   }
 
+  function initTrialSection() {
+    var startBtn = $("#trialStartBtn");
+    var closeBtn = $("#trialCloseBtn");
+    var guide = $("#trialGuide");
+    var card = $("#trialCard");
+    var steps = $("#trialSteps");
+
+    if (startBtn && guide) {
+      startBtn.addEventListener("click", function () {
+        guide.hidden = false;
+        startBtn.setAttribute("aria-expanded", "true");
+        if (card) card.classList.add("is-expanded");
+        requestAnimationFrame(function () {
+          if (steps) {
+            steps.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        });
+      });
+    }
+
+    if (closeBtn && guide && startBtn) {
+      closeBtn.addEventListener("click", function () {
+        guide.hidden = true;
+        startBtn.setAttribute("aria-expanded", "false");
+        if (card) card.classList.remove("is-expanded");
+        if (card) {
+          card.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+      });
+    }
+  }
+
   function init() {
     document.querySelectorAll(".plan-card__btn").forEach(function (btn) {
       btn.addEventListener("click", function () {
@@ -1176,6 +1219,7 @@
     if (fileInput) fileInput.addEventListener("change", onComprobanteChange);
 
     initDemoPlayer();
+    initTrialSection();
     setUiStep(1);
     setMainCheckoutMode(false);
     updateFlowCambiarMetodoVisibility();

@@ -129,15 +129,12 @@ img {
   line-height: 0;
   background: transparent;
   border-radius: 0;
-  filter: drop-shadow(0 0 18px rgba(168, 85, 247, 0.55))
-    drop-shadow(0 0 42px rgba(91, 33, 182, 0.32));
-  transition: filter 0.45s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  filter: none;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .header__brand:hover .header__logo-wrap {
   transform: scale(1.04);
-  filter: drop-shadow(0 0 24px rgba(192, 132, 252, 0.65))
-    drop-shadow(0 0 52px rgba(124, 58, 237, 0.38));
 }
 
 .header__logo {
@@ -179,25 +176,6 @@ img {
   .header__logo-wrap picture {
     display: block;
     line-height: 0;
-  }
-
-  .header__logo-wrap::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: clamp(64px, 18vw, 96px);
-    height: clamp(64px, 18vw, 96px);
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: -1;
-    background: radial-gradient(
-      circle,
-      rgba(168, 85, 247, 0.42) 0%,
-      rgba(124, 58, 237, 0.18) 42%,
-      transparent 68%
-    );
   }
 
   .header__brand:hover .header__logo-wrap {
@@ -395,10 +373,17 @@ img {
 .demo-shell__media {
   grid-row: 1;
   grid-column: 1;
-  min-height: 0;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  min-height: clamp(220px, 56.25vw, 518px);
   overflow: hidden;
   border-radius: clamp(10px, 2.2vw, 14px) clamp(10px, 2.2vw, 14px) 0 0;
   background: #000;
+  cursor: pointer;
+}
+
+.demo-dock__btn--play .demo-dock__icon[hidden] {
+  display: none !important;
 }
 
 .demo-dock__volume {
@@ -429,7 +414,8 @@ img {
 .hero-video.demo-shell__video {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: contain;
   vertical-align: middle;
   background: #000;
   position: relative;

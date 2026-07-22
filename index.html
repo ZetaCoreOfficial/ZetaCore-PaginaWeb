@@ -10,7 +10,7 @@
       href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Rajdhani:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=21" />
+    <link rel="stylesheet" href="styles.css?v=25" />
     <link rel="stylesheet" href="ui-aaa.css?v=53" />
     <link rel="stylesheet" href="change-action-buttons.css?v=5" />
     <link rel="stylesheet" href="payment-methods-qr-binance.css?v=17" />
@@ -18,8 +18,10 @@
     <link rel="stylesheet" href="perma-hero.css?v=14" />
     <link rel="stylesheet" href="planes-layout-fix.css?v=5" />
     <link rel="stylesheet" href="faq-spec.css?v=17" />
+    <link rel="stylesheet" href="trial-spec.css?v=7" />
     <link rel="stylesheet" href="zeta-plan-btn.css?v=11" />
-    <link rel="stylesheet" href="popular-badge.css?v=5" />
+    <link rel="stylesheet" href="popular-badge.css?v=7" />
+    <link rel="stylesheet" href="planes-perf.css?v=9" />
   </head>
   <body>
     <svg
@@ -61,12 +63,12 @@
           <picture>
             <source
               media="(max-width: 640px)"
-              srcset="assets/zetacore-logo-mobile.png?v=1"
+              srcset="assets/zetacore-logo-mobile.png?v=2"
               type="image/png"
             />
             <img
               class="header__logo"
-              src="assets/zetacore-logo-transparent.png?v=5"
+              src="assets/zetacore-logo-transparent.png?v=8"
               alt="ZetaCore"
               width="512"
               height="512"
@@ -114,7 +116,7 @@
                     aria-label="Demostración visual de ZetaCore"
                   >
                     <source
-                      src="https://zetacoreguard.zplir1501.workers.dev/pagos/demo-video?v=4"
+                      src="https://zetacoreguard.cjosuepadilla123.workers.dev/pagos/demo-video?v=4"
                       type="video/mp4"
                     />
                   </video>
@@ -466,12 +468,12 @@
               </div>
               <div class="plan-card__copy">
                 <h3 class="plan-card__name plan-name">Activación Denuvo</h3>
-                <p class="plan-card__price plan-price"><span class="plan-card__amount">99</span> Bs</p>
+                <p class="plan-card__price plan-price"><span class="plan-card__amount">49</span> Bs</p>
                 <p class="plan-card__price plan-card__price--alt plan-usdt">
-                  <span class="plan-card__amount">14</span> USDT
+                  <span class="plan-card__amount">8</span> USDT
                 </p>
                 <p class="plan-card__price-line" hidden>
-                  <span class="plan-card__line-bs">99</span> Bs / <span class="plan-card__line-usdt">14</span> USDT
+                  <span class="plan-card__line-bs">49</span> Bs / <span class="plan-card__line-usdt">8</span> USDT
                 </p>
                 <p class="plan-card__desc plan-description">
                   Activación adicional para juegos con protección Denuvo.
@@ -1027,6 +1029,216 @@
         </section>
       </div>
 
+      <section class="section section--trial trial-section" id="prueba-gratuita">
+        <h2 class="section__title section__title--sci trial-title">Prueba Gratuita</h2>
+        <article class="trial-card" id="trialCard">
+          <span class="trial-corner tl" aria-hidden="true"></span>
+          <span class="trial-corner tr" aria-hidden="true"></span>
+          <span class="trial-corner bl" aria-hidden="true"></span>
+          <span class="trial-corner br" aria-hidden="true"></span>
+
+          <header class="trial-card__head">
+            <div class="trial-icon-wrap" aria-hidden="true">
+              <svg class="trial-icon-svg" viewBox="0 0 112 98" width="112" height="98" focusable="false">
+                <g class="trial-icon-art">
+                  <circle cx="56" cy="43" r="15" fill="none" stroke="currentColor" stroke-width="3.4" />
+                  <path d="M56 31v11.5l7.5 4.5" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" />
+                  <path
+                    d="M39 20l4 2M73 20l-4 2"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.6"
+                    stroke-linecap="round"
+                    opacity="0.92"
+                  />
+                  <text
+                    x="56"
+                    y="71"
+                    text-anchor="middle"
+                    dominant-baseline="middle"
+                    font-size="10.5"
+                    font-weight="800"
+                  >
+                    24 Hrs
+                  </text>
+                </g>
+              </svg>
+            </div>
+            <h3 class="trial-card__name">Prueba gratis de ZetaCore</h3>
+            <p class="trial-card__tagline">
+              Sigue los 6 pasos: instala la prueba gratis de ZetaCore y disfruta <strong>24 horas</strong> para añadir juegos en Steam.
+            </p>
+          </header>
+
+          <div class="trial-card__cta">
+            <button
+              type="button"
+              class="zeta-plan-btn trial-card__btn"
+              id="trialStartBtn"
+              aria-expanded="false"
+              aria-controls="trialGuide"
+            >
+              <span class="zeta-plan-btn__face">
+                <span class="zeta-plan-btn__content">
+                  <span class="zeta-plan-btn__text">Prueba Ahora</span>
+                </span>
+                <span class="zeta-plan-btn__arrow" aria-hidden="true">
+                  <svg viewBox="0 0 56 56" width="34" height="34" aria-hidden="true" focusable="false">
+                    <path
+                      d="M15 14l11.5 14L15 42M31 14l11.5 14L31 42"
+                      fill="none"
+                      stroke="url(#zcNeonNavStroke)"
+                      stroke-width="3.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </span>
+              </span>
+            </button>
+          </div>
+
+          <div class="trial-guide" id="trialGuide" hidden>
+            <div class="trial-steps" id="trialSteps">
+              <article class="trial-step">
+                <div class="trial-step__head">
+                  <span class="trial-step__num">1</span>
+                  <h4 class="trial-step__title">Descarga la Prueba Gratis</h4>
+                </div>
+                <div class="trial-step__body">
+                  <p>
+                    Haz clic en el botón <strong>Descargar aquí</strong> para descargar <strong>ZetaCore-PruebaGratis.exe</strong> desde nuestros servidores.
+                  </p>
+                  <a
+                    class="trial-download-btn"
+                    id="trialDownloadBtn"
+                    href="https://zetacoreguard.cjosuepadilla123.workers.dev/installer/ZetaCore-PruebaGratis.exe?v=21"
+                    download="ZetaCore-PruebaGratis.exe"
+                    rel="noopener"
+                  >
+                    Descargar aquí
+                  </a>
+                </div>
+              </article>
+
+              <article class="trial-step">
+                <div class="trial-step__head">
+                  <span class="trial-step__num">2</span>
+                  <h4 class="trial-step__title">Abre el instalador y pulsa «Instalar prueba gratis»</h4>
+                </div>
+                <div class="trial-step__body">
+                  <p>
+                    Abre <strong>ZetaCore-PruebaGratis.exe</strong> (doble clic). Si Windows muestra
+                    <strong>«Editor desconocido»</strong>, pulsa <strong>Más información</strong> y luego
+                    <strong>Ejecutar de todas formas</strong>.
+                  </p>
+                  <p>Cuando se abra la ventana, pulsa el botón morado <strong>Instalar prueba gratis</strong>.</p>
+                  <figure class="trial-step__media trial-step__media--compact">
+                    <img
+                      src="assets/trial/step2-installer-open.png?v=1"
+                      alt="Ventana ZetaCore Prueba gratis con el botón Instalar prueba gratis"
+                      loading="lazy"
+                      width="503"
+                      height="565"
+                    />
+                  </figure>
+                </div>
+              </article>
+
+              <article class="trial-step">
+                <div class="trial-step__head">
+                  <span class="trial-step__num">3</span>
+                  <h4 class="trial-step__title">Espera a que termine la instalación</h4>
+                </div>
+                <div class="trial-step__body">
+                  <p>No cierres la ventana hasta ver el mensaje <strong>«¡Listo!»</strong> y que ZetaCore se instaló con éxito.</p>
+                  <figure class="trial-step__media trial-step__media--compact">
+                    <img
+                      src="assets/trial/step3-install-done.png?v=2"
+                      alt="Instalación completada: ZetaCore fue instalado con éxito"
+                      loading="lazy"
+                      width="503"
+                      height="565"
+                    />
+                  </figure>
+                </div>
+              </article>
+
+              <article class="trial-step">
+                <div class="trial-step__head">
+                  <span class="trial-step__num">4</span>
+                  <h4 class="trial-step__title">Abre Steam y comprueba el botón de ZetaCore</h4>
+                </div>
+                <div class="trial-step__body">
+                  <p>
+                    Abre Steam (si no se abrió solo). En la esquina superior derecha de la tienda de Steam debe aparecer el botón circular morado con la
+                    <strong>Z</strong> de ZetaCore. Si lo ves, la instalación fue correcta.
+                  </p>
+                  <figure class="trial-step__media">
+                    <img
+                      src="assets/trial/step4-steam-button.png?v=1"
+                      alt="Botón de ZetaCore visible en la barra superior de Steam"
+                      loading="lazy"
+                      width="640"
+                      height="360"
+                    />
+                  </figure>
+                </div>
+              </article>
+
+              <article class="trial-step">
+                <div class="trial-step__head">
+                  <span class="trial-step__num">5</span>
+                  <h4 class="trial-step__title">Añade un juego con ZetaCore</h4>
+                </div>
+                <div class="trial-step__body">
+                  <p>
+                    Busca cualquier juego en la tienda de Steam y pulsa <strong>Añadir con ZetaCore</strong> (botón morado arriba a la
+                    derecha en la ficha del juego).
+                  </p>
+                  <figure class="trial-step__media">
+                    <img
+                      src="assets/trial/step5-add-game.png?v=1"
+                      alt="Botón Añadir con ZetaCore en la página de un juego en Steam"
+                      loading="lazy"
+                      width="640"
+                      height="360"
+                    />
+                  </figure>
+                </div>
+              </article>
+
+              <article class="trial-step trial-step--text-only">
+                <div class="trial-step__head">
+                  <span class="trial-step__num">6</span>
+                  <h4 class="trial-step__title">Reinicia Steam y listo</h4>
+                </div>
+                <div class="trial-step__body">
+                  <p>
+                    Pulsa el botón morado <strong>Reiniciar Steam</strong> en ZetaCore. Steam se reiniciará automáticamente. Ya puedes
+                    jugar el juego que añadiste durante tus <strong>24 horas</strong> de prueba.
+                  </p>
+                </div>
+              </article>
+            </div>
+
+            <aside class="trial-notes" aria-label="Notas adicionales">
+              <h5 class="trial-notes__title">Nota adicional</h5>
+              <ul class="trial-notes__list">
+                <li>Si tu antivirus bloquea el .exe, desactívalo o añade una excepción para <strong>ZetaCore-PruebaGratis.exe</strong>.</li>
+                <li>Solo se puede usar la prueba gratis <strong>una vez por equipo</strong>.</li>
+                <li>El online solo está disponible para usuarios premium.</li>
+                <li>Los juegos con Denuvo solo funcionan con activación Denuvo (premium).</li>
+              </ul>
+            </aside>
+
+            <div class="trial-guide__footer">
+              <button type="button" class="trial-close-btn" id="trialCloseBtn">Cerrar</button>
+            </div>
+          </div>
+        </article>
+      </section>
+
       <section class="section faq faq-section" id="faq">
         <h2 class="section__title section__title--sci faq-title">Preguntas frecuentes</h2>
         <div class="faq__list faq-list">
@@ -1355,6 +1567,7 @@
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-    <script src="script.js?v=49"></script>
+    <script src="script.js?v=59"></script>
+    <script src="planes-perf.js?v=7" defer></script>
   </body>
 </html>

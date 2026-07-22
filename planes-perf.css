@@ -1,0 +1,435 @@
+/**
+ * Modo lite — scroll fluido: hero/demo, Planes (Paso 1) y checkout (Paso 2).
+ * Carga al final del cascade.
+ */
+
+html {
+  scroll-behavior: auto !important;
+}
+
+/* Fondos fijos: blur(100px) + grid = repaint caro al scrollear. */
+html.zc-hero-inview .bg-glow,
+html.zc-planes-inview .bg-glow,
+html:has(#flowPanel:not(.flow-panel--hidden)) .bg-glow {
+  display: none !important;
+}
+
+html.zc-hero-inview .bg-grid,
+html.zc-planes-inview .bg-grid,
+html:has(#flowPanel:not(.flow-panel--hidden)) .bg-grid {
+  opacity: 0.28 !important;
+}
+
+html.zc-hero-inview .steps__track,
+html.zc-hero-inview .steps__track::before,
+html.zc-hero-inview .steps__track::after,
+html.zc-hero-inview .steps__item.is-active .steps__num,
+html.zc-planes-inview .steps__track,
+html.zc-planes-inview .steps__track::before,
+html.zc-planes-inview .steps__track::after,
+html.zc-planes-inview .steps__item.is-active .steps__num,
+html:has(#flowPanel:not(.flow-panel--hidden)) .steps__track,
+html:has(#flowPanel:not(.flow-panel--hidden)) .steps__track::before,
+html:has(#flowPanel:not(.flow-panel--hidden)) .steps__track::after,
+html:has(#flowPanel:not(.flow-panel--hidden)) .steps__item.is-active .steps__num {
+  animation: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* =============================================================================
+   HERO — demo video (parte superior, img1)
+   ============================================================================= */
+
+html.zc-hero-inview .header__brand {
+  animation: none !important;
+}
+
+html.zc-hero-inview .header__logo-wrap,
+html.zc-hero-inview .header__brand:hover .header__logo-wrap {
+  filter: none !important;
+  transform: none !important;
+}
+
+.hero-video-block {
+  animation: none !important;
+}
+
+.hero-video-block__label-line {
+  box-shadow: none !important;
+}
+
+.hero-video-block__label {
+  text-shadow: none !important;
+}
+
+.header .demo-shell__frame {
+  box-shadow:
+    0 0 0 1px rgba(124, 58, 237, 0.15),
+    0 0 24px rgba(124, 58, 237, 0.2),
+    0 18px 40px rgba(0, 0, 0, 0.55) !important;
+  transition: border-color 0.2s ease !important;
+}
+
+.header .demo-shell:hover .demo-shell__frame {
+  transform: none !important;
+  box-shadow:
+    0 0 0 1px rgba(167, 139, 250, 0.2),
+    0 0 28px rgba(168, 85, 247, 0.24),
+    0 20px 44px rgba(0, 0, 0, 0.58) !important;
+}
+
+.header .demo-shell__hud-corner {
+  filter: none !important;
+}
+
+.header .demo-shell__hud-glow {
+  filter: none !important;
+}
+
+.header .demo-shell__dock-glass {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background: linear-gradient(180deg, transparent 0%, rgba(4, 2, 10, 0.82) 35%, rgba(4, 2, 12, 0.97) 100%) !important;
+}
+
+html.zc-is-scrolling .header .demo-shell__frame,
+html.zc-is-scrolling .header .demo-shell__dock-glass {
+  transition: none !important;
+}
+
+/* =============================================================================
+   PASO 2 — checkout / método de pago
+   ============================================================================= */
+
+#flowPanel:not(.flow-panel--hidden) {
+  animation: none !important;
+}
+
+#flowPanel:not(.flow-panel--hidden),
+#flowPanel:not(.flow-panel--hidden) *,
+#flowPanel:not(.flow-panel--hidden) *::before,
+#flowPanel:not(.flow-panel--hidden) *::after {
+  animation: none !important;
+  animation-duration: 0s !important;
+  transition-property: color, background-color, border-color, opacity !important;
+  transition-duration: 0.15s !important;
+}
+
+#flowPanel:not(.flow-panel--hidden) .flow-hero__title {
+  text-shadow: none !important;
+}
+
+#flowPanel:not(.flow-panel--hidden) .flow-plan-strip__inner,
+#flowPanel:not(.flow-panel--hidden) .flow-plan-strip--permanente .flow-plan-strip__inner {
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.35),
+    0 0 18px rgba(124, 58, 237, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+}
+
+#flowPanel:not(.flow-panel--hidden) .flow-plan-strip-perma .perma-hero-icon::before,
+#flowPanel:not(.flow-panel--hidden) .flow-plan-strip .plan-icon-wrap.plan-card__icon--featured .perma-hero-icon::before {
+  display: none !important;
+  content: none !important;
+  filter: none !important;
+}
+
+#flowPanel:not(.flow-panel--hidden) .flow-plan-strip-perma .perma-energy,
+#flowPanel:not(.flow-panel--hidden) .flow-plan-strip .plan-icon-wrap.plan-card__icon--featured .perma-energy {
+  display: none !important;
+}
+
+#flowPanel:not(.flow-panel--hidden) .flow-plan-strip-perma .perma-hex-outer,
+#flowPanel:not(.flow-panel--hidden) .flow-plan-strip .plan-icon-wrap.plan-card__icon--featured .perma-hex-outer {
+  box-shadow:
+    0 0 0 2px rgba(158, 86, 255, 0.5),
+    0 0 10px rgba(189, 95, 255, 0.35) !important;
+}
+
+#flowPanel:not(.flow-panel--hidden) .flow-plan-strip-perma .perma-hex-middle,
+#flowPanel:not(.flow-panel--hidden) .flow-plan-strip .plan-icon-wrap.plan-card__icon--featured .perma-hex-middle {
+  box-shadow:
+    0 0 0 1px rgba(224, 176, 255, 0.55),
+    0 0 6px rgba(207, 143, 255, 0.18) !important;
+}
+
+#flowPanel:not(.flow-panel--hidden) .perma-shield-svg,
+#flowPanel:not(.flow-panel--hidden) .perma-shield-main,
+#flowPanel:not(.flow-panel--hidden) .perma-z-fill,
+#flowPanel:not(.flow-panel--hidden) .perma-z-stroke,
+#flowPanel:not(.flow-panel--hidden) .plan-icon-svg,
+#flowPanel:not(.flow-panel--hidden) .plan-card__icon-art,
+#flowPanel:not(.flow-panel--hidden) .flow-plan-strip__icon-mount:not(:has(.selected-plan-icon-hex)) .plan-icon-svg {
+  filter: none !important;
+  shape-rendering: optimizeSpeed !important;
+}
+
+#flowPlanStrip .flow-plan-strip__meta-top .flow-plan-strip__popular.flow-plan-strip__popular.plan-card__badge.popular-badge,
+#flowPlanStrip .flow-plan-strip__meta-top .flow-plan-strip__popular.flow-plan-strip__popular.plan-card__badge.popular-badge::after {
+  filter: none !important;
+  mix-blend-mode: normal !important;
+  text-shadow: none !important;
+  box-shadow:
+    0 0 10px rgba(195, 130, 255, 0.26),
+    0 0 18px rgba(130, 65, 210, 0.1) !important;
+}
+
+#flowPlanStrip .flow-plan-strip__meta-top .flow-plan-strip__popular.flow-plan-strip__popular.plan-card__badge.popular-badge::after {
+  opacity: 0.16 !important;
+}
+
+#flowPanel:not(.flow-panel--hidden) .change-action-btn::after {
+  display: none !important;
+}
+
+#flowPanel:not(.flow-panel--hidden) .change-action-btn:hover {
+  transform: none !important;
+}
+
+#flowPanel:not(.flow-panel--hidden) .change-action-btn__icon svg,
+#flowPanel:not(.flow-panel--hidden) .flow-panel__back .zc-neon-arrow--back,
+#flowPanel:not(.flow-panel--hidden) .payment-method-button__arrow svg,
+#flowPanel:not(.flow-panel--hidden) .zc-neon-arrow--method-cta {
+  filter: none !important;
+}
+
+#flowPanel:not(.flow-panel--hidden) .payment-methods-section {
+  box-shadow:
+    0 0 0 1px rgba(215, 155, 255, 0.06) inset,
+    0 0 16px rgba(143, 63, 255, 0.18),
+    0 14px 32px rgba(0, 0, 0, 0.38) !important;
+}
+
+#flowPanel:not(.flow-panel--hidden) .payment-method-card {
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.03),
+    0 0 14px rgba(127, 48, 255, 0.1),
+    0 12px 28px rgba(0, 0, 0, 0.32) !important;
+}
+
+#flowPanel:not(.flow-panel--hidden) .payment-method-card:hover,
+#flowPanel:not(.flow-panel--hidden) .payment-method-card.is-active:hover {
+  transform: none !important;
+}
+
+#flowPanel:not(.flow-panel--hidden) .payment-method-card.is-active {
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04),
+    0 0 0 1px rgba(168, 85, 247, 0.35),
+    0 0 22px rgba(168, 85, 247, 0.22),
+    0 12px 28px rgba(0, 0, 0, 0.32) !important;
+}
+
+#flowPanel:not(.flow-panel--hidden) .payment-method-icon-hex.qr svg,
+#flowPanel:not(.flow-panel--hidden) .payment-method-icon-hex .payment-qr-icon,
+#flowPanel:not(.flow-panel--hidden) .payment-binance-icon {
+  filter: none !important;
+}
+
+#flowPanel:not(.flow-panel--hidden) .payment-methods-section .payment-method-button__text {
+  text-shadow: none !important;
+}
+
+#flowPanel:not(.flow-panel--hidden) .payment-methods-section .payment-method-button::before {
+  box-shadow:
+    0 0 8px rgba(200, 130, 255, 0.4),
+    0 0 16px rgba(150, 75, 230, 0.22) !important;
+}
+
+#flowPanel:not(.flow-panel--hidden) .payment-method-card:hover .payment-method-button,
+#flowPanel:not(.flow-panel--hidden) .payment-method-card:hover .payment-method-button::before {
+  transform: none !important;
+  filter: none !important;
+}
+
+#flowPanel:not(.flow-panel--hidden) .benefits-bar {
+  background: linear-gradient(120deg, #6d28d9, #a855f7, #22d3ee, #a855f7, #6d28d9) !important;
+  background-size: 100% 100% !important;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset,
+    0 0 14px rgba(168, 85, 247, 0.35),
+    0 8px 22px rgba(0, 0, 0, 0.4) !important;
+}
+
+#flowPanel:not(.flow-panel--hidden) .benefits-bar::before {
+  display: none !important;
+}
+
+#flowPanel:not(.flow-panel--hidden) .benefits-bar__sep {
+  text-shadow: 0 0 8px rgba(168, 85, 247, 0.65) !important;
+}
+
+#flowPanel:not(.flow-panel--hidden) .benefits-bar__icon {
+  filter: none !important;
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.3) inset,
+    0 0 8px rgba(192, 132, 252, 0.35) !important;
+}
+
+#flowPanel:not(.flow-panel--hidden) .benefits-bar__text strong {
+  text-shadow: none !important;
+}
+
+/* =============================================================================
+   PASO 1 — planes
+   ============================================================================= */
+
+.section--planes.plans-section #planCards.plans-grid:not(.plans--checkout) > .plan-card.featured,
+.section--planes.plans-section #planCards.plans-grid:not(.plans--checkout) > .plan-card.featured.perma-hero-card,
+.section--planes.plans-section #planCards.plans-grid:not(.plans--checkout) > .plan-card.featured.perma-hero-card:hover:not(.plan-card--hidden) {
+  transform: none !important;
+}
+
+.section--planes.plans-section,
+.section--planes.plans-section *,
+.section--planes.plans-section *::before,
+.section--planes.plans-section *::after {
+  animation: none !important;
+  animation-duration: 0s !important;
+  transition-property: color, background-color, border-color, opacity !important;
+  transition-duration: 0.15s !important;
+}
+
+.section--planes.plans-section .plans.plans-grid:not(.plans--checkout) > .plan-card,
+.section--planes.plans-section .plans.plans-grid.plans--checkout > article.plan-card.plan-card--checkout-focus:not(.plan-card--hidden) {
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.035),
+    0 12px 24px rgba(0, 0, 0, 0.45),
+    0 0 14px rgba(128, 54, 255, 0.1) !important;
+}
+
+.section--planes.plans-section .plans.plans-grid:not(.plans--checkout) > .plan-card:hover:not(.plan-card--hidden),
+.section--planes.plans-section .plans.plans-grid.plans--checkout > article.plan-card.plan-card--checkout-focus:not(.plan-card--hidden):hover {
+  transform: none !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04),
+    0 12px 24px rgba(0, 0, 0, 0.45),
+    0 0 16px rgba(128, 54, 255, 0.14) !important;
+}
+
+.section--planes.plans-section .plans.plans-grid:not(.plans--checkout) > article.plan-card.featured.plan-card--featured.perma-hero-card,
+.section--planes.plans-section .plans.plans-grid.plans--checkout > article.plan-card.featured.plan-card--featured.perma-hero-card.plan-card--checkout-focus:not(.plan-card--hidden) {
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04),
+    0 14px 28px rgba(0, 0, 0, 0.48),
+    0 0 18px rgba(119, 43, 235, 0.14) !important;
+}
+
+.section--planes.plans-section .plans.plans-grid:not(.plans--checkout) > article.plan-card.featured.plan-card--featured.perma-hero-card::before,
+.section--planes.plans-section .plans.plans-grid.plans--checkout > article.plan-card.featured.plan-card--featured.perma-hero-card.plan-card--checkout-focus:not(.plan-card--hidden)::before {
+  opacity: 0.65 !important;
+}
+
+.section--planes.plans-section .plans.plans-grid:not(.plans--checkout) > article.plan-card.featured.plan-card--featured.perma-hero-card::after,
+.section--planes.plans-section .plans.plans-grid.plans--checkout > article.plan-card.featured.plan-card--featured.perma-hero-card.plan-card--checkout-focus:not(.plan-card--hidden)::after {
+  box-shadow: inset 0 0 12px rgba(191, 106, 255, 0.05) !important;
+}
+
+.section--planes.plans-section .plans.plans-grid:not(.plans--checkout) > article.plan-card.featured.plan-card--featured.perma-hero-card .plan-card__badge.popular-badge,
+.section--planes.plans-section .plans.plans-grid.plans--checkout > article.plan-card.featured.plan-card--featured.perma-hero-card.plan-card--checkout-focus:not(.plan-card--hidden) .plan-card__badge.popular-badge {
+  filter: none !important;
+  mix-blend-mode: normal !important;
+  box-shadow:
+    0 0 12px rgba(195, 130, 255, 0.28),
+    0 0 20px rgba(130, 65, 210, 0.12) !important;
+  text-shadow: none !important;
+}
+
+.section--planes.plans-section .plans.plans-grid:not(.plans--checkout) > article.plan-card.featured.plan-card--featured.perma-hero-card .plan-card__badge.popular-badge::after,
+.section--planes.plans-section .plans.plans-grid.plans--checkout > article.plan-card.featured.plan-card--featured.perma-hero-card.plan-card--checkout-focus:not(.plan-card--hidden) .plan-card__badge.popular-badge::after {
+  mix-blend-mode: normal !important;
+  opacity: 0.18 !important;
+  background-position: 35% 50% !important;
+}
+
+.section--planes.plans-section .plans.plans-grid:not(.plans--checkout) > article.plan-card.featured.plan-card--featured.perma-hero-card .plan-card__badge.popular-badge span,
+.section--planes.plans-section .plans.plans-grid.plans--checkout > article.plan-card.featured.plan-card--featured.perma-hero-card.plan-card--checkout-focus:not(.plan-card--hidden) .plan-card__badge.popular-badge span {
+  text-shadow: none !important;
+}
+
+.section--planes.plans-section .plans.plans-grid:not(.plans--checkout) > article.plan-card.featured.plan-card--featured.perma-hero-card .perma-hero-icon::before,
+.section--planes.plans-section .plans.plans-grid.plans--checkout > article.plan-card.featured.plan-card--featured.perma-hero-card.plan-card--checkout-focus:not(.plan-card--hidden) .perma-hero-icon::before {
+  display: none !important;
+  content: none !important;
+  filter: none !important;
+}
+
+.section--planes.plans-section .plans.plans-grid:not(.plans--checkout) > article.plan-card.featured.plan-card--featured.perma-hero-card .perma-energy,
+.section--planes.plans-section .plans.plans-grid.plans--checkout > article.plan-card.featured.plan-card--featured.perma-hero-card.plan-card--checkout-focus:not(.plan-card--hidden) .perma-energy {
+  display: none !important;
+}
+
+.section--planes.plans-section .plans.plans-grid:not(.plans--checkout) > article.plan-card.featured.plan-card--featured.perma-hero-card .perma-hex-outer,
+.section--planes.plans-section .plans.plans-grid.plans--checkout > article.plan-card.featured.plan-card--featured.perma-hero-card.plan-card--checkout-focus:not(.plan-card--hidden) .perma-hex-outer {
+  box-shadow:
+    0 0 0 2px rgba(158, 86, 255, 0.5),
+    0 0 10px rgba(189, 95, 255, 0.35) !important;
+}
+
+.section--planes.plans-section .plans.plans-grid:not(.plans--checkout) > article.plan-card.featured.plan-card--featured.perma-hero-card .perma-hex-middle,
+.section--planes.plans-section .plans.plans-grid.plans--checkout > article.plan-card.featured.plan-card--featured.perma-hero-card.plan-card--checkout-focus:not(.plan-card--hidden) .perma-hex-middle {
+  box-shadow:
+    0 0 0 1px rgba(224, 176, 255, 0.55),
+    0 0 6px rgba(207, 143, 255, 0.18) !important;
+}
+
+.section--planes.plans-section .perma-shield-svg,
+.section--planes.plans-section .perma-shield-main,
+.section--planes.plans-section .perma-z-fill,
+.section--planes.plans-section .perma-z-stroke,
+.section--planes.plans-section .perma-z-highlight,
+.section--planes.plans-section .plan-icon-svg,
+.section--planes.plans-section .plan-card__icon-art {
+  filter: none !important;
+  shape-rendering: optimizeSpeed !important;
+}
+
+.section--planes.plans-section .plan-name,
+.section--planes.plans-section .plan-price,
+.section--planes.plans-section .plan-card__name,
+.section--planes.plans-section .plan-card__price,
+.section--planes.plans-section .plans.plans-grid:not(.plans--checkout) > article.plan-card.featured.plan-card--featured.perma-hero-card .plan-name,
+.section--planes.plans-section .plans.plans-grid:not(.plans--checkout) > article.plan-card.featured.plan-card--featured.perma-hero-card .plan-price {
+  text-shadow: none !important;
+}
+
+.section--planes.plans-section > h2.plans-title.section__title--sci {
+  text-shadow: none !important;
+}
+
+.section--planes.plans-section > h2.plans-title.section__title--sci::before,
+.section--planes.plans-section > h2.plans-title.section__title--sci::after {
+  box-shadow: none !important;
+}
+
+.section--planes.plans-section .plans.plans-grid:not(.plans--checkout) > .plan-card > .plan-button.plan-card__btn:hover:not(:disabled),
+.section--planes.plans-section .plans.plans-grid.plans--checkout > article.plan-card.plan-card--checkout-focus:not(.plan-card--hidden) > .plan-button.plan-card__btn:hover:not(:disabled) {
+  transform: none !important;
+  filter: none !important;
+}
+
+.section--planes.plans-section .plan-corner,
+.section--planes.plans-section .plan-icon-wrap,
+.section--planes.plans-section .perma-hero-icon,
+.section--planes.plans-section .perma-hex {
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .steps__track,
+  .steps__track::after,
+  .steps__item.is-active .steps__num,
+  .header__brand {
+    animation: none !important;
+  }
+}
+
+/* POPULAR en «Tu plan»: oculto por defecto; solo Plan Permanente (.is-popular-plan). */
+#flowPlanStrip #flowPlanPopularBadge {
+  display: none !important;
+}
+
+#flowPlanStrip #flowPlanPopularBadge.is-popular-plan:not([hidden]) {
+  display: inline-flex !important;
+}

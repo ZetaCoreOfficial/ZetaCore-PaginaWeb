@@ -359,6 +359,19 @@
     drop-shadow(0 0 34px rgba(125, 65, 205, 0.18)) !important;
 }
 
+/* Solo Plan Permanente en strip «Tu plan» (gana a display:inline-flex del badge). */
+#flowPlanStrip #flowPlanPopularBadge {
+  display: none !important;
+}
+
+#flowPlanStrip #flowPlanPopularBadge.is-popular-plan {
+  display: inline-flex !important;
+}
+
+#flowPlanStrip #flowPlanPopularBadge[hidden] {
+  display: none !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .section--planes.plans-section .plans.plans-grid:not(.plans--checkout) > article.plan-card.featured.plan-card--featured.perma-hero-card .plan-card__badge.popular-badge,
   .section--planes.plans-section .plans.plans-grid.plans--checkout > article.plan-card.featured.plan-card--featured.perma-hero-card.plan-card--checkout-focus:not(.plan-card--hidden) .plan-card__badge.popular-badge {
